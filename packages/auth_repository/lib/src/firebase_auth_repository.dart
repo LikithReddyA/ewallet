@@ -14,6 +14,11 @@ class FirebaseAuthRepository implements AuthRepo {
       _firebaseAuth.authStateChanges().map((firebaseUser) => firebaseUser);
 
   @override
+  firebase_auth.User? getCurrentUser() {
+    return _firebaseAuth.currentUser;
+  }
+
+  @override
   Future<String> signUp(String email, String password) async {
     try {
       firebase_auth.UserCredential user = await _firebaseAuth

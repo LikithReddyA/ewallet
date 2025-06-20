@@ -36,6 +36,7 @@ class LoginPage extends StatelessWidget {
                         _emailController.text,
                         _passwordController.text,
                       );
+                      context.goNamed(Routes.profileCreation.name);
                     },
                     child: Text("Sign in"),
                   ),

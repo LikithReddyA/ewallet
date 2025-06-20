@@ -1,15 +1,18 @@
 import 'package:auth_repository/auth_repository.dart';
 import 'package:ewallet/app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:ewallet/app/blocs/auth_bloc/auth_user_changed_event_sink.dart';
 import 'package:ewallet/app/router/go_route_steam_to_listenable.dart';
 import 'package:ewallet/app/router/routes.dart';
 import 'package:ewallet/app/router/simple_navigator_observer.dart';
 import 'package:ewallet/features/home/home.dart';
 import 'package:ewallet/features/log_in/log_in.dart';
+import 'package:ewallet/features/profile_creation/profile_creation.dart';
 import 'package:ewallet/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:ewallet/features/sign_up/views/sign_up_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wallet_repository/wallet_repository.dart';
 
 class AppRouter {
   static GoRouter appRouter(BuildContext context) {
@@ -28,6 +31,15 @@ class AppRouter {
         final isOnAllowedUnauthenticatedPages = allowedUnauthenticatedPages
             .contains(state.matchedLocation);
 
+        final isProfileCreated = authBloc.state.isProfileCreated ?? false;
+
+        final isOnProfilePage =
+            state.matchedLocation == Routes.profileCreation.path;
+
+        // ✅ Authenticated but profile incomplete → redirect to profile page
+        if (isAuthenticated && !isProfileCreated && !isOnProfilePage) {
+          return Routes.profileCreation.path;
+        }
         if (!isAuthenticated && !isOnAllowedUnauthenticatedPages) {
           return Routes.login.path;
         } else if (isAuthenticated && isOnAllowedUnauthenticatedPages) {
@@ -63,6 +75,20 @@ class AppRouter {
             create: (context) =>
                 SignUpCubit(authRepo: context.read<AuthRepo>()),
             child: SignUpPage(),
+          ),
+        ),
+        GoRoute(
+          path: Routes.profileCreation.path,
+          name: Routes.profileCreation.name,
+          builder: (context, state) => BlocProvider(
+            create: (context) => ProfileCreationBloc(
+              myWalletRepository: context.read<WalletRepo>(),
+              myAuthEventSink: AuthUserChangedEventSink(
+                authBloc: authBloc,
+                authRepo: context.read<AuthRepo>(),
+              ),
+            ),
+            child: ProfileCreationPage(),
           ),
         ),
       ],
