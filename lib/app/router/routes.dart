@@ -1,5 +1,6 @@
 enum Routes {
-  home(name: 'home', path: '/home');
+  home(name: 'home', path: '/home'),
+  login(name: 'login', path: '/login');
 
   final String name;
   final String path;
