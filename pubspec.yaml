@@ -31,14 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  #auth repository package
-  auth_repository:
-    path: packages/auth_repository
-
-  # wallet firebase_repository package
-  wallet_repository:
-    path: packages/wallet_repository
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -47,6 +39,7 @@ dependencies:
   equatable: ^2.0.7
   firebase_auth: ^5.6.0
   go_router: ^15.2.0
+  get_it: ^8.0.3
 
 dev_dependencies:
   flutter_test:
