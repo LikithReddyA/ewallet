@@ -22,4 +22,13 @@ class FirebaseAuthDatasource implements AuthDatasource {
       rethrow;
     }
   }
+
+  @override
+  Future<void> signOut() async {
+    try {
+      await firebaseAuth.signOut();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
