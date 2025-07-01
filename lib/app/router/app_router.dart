@@ -3,6 +3,7 @@ import 'package:ewallet/app/router/routes.dart';
 import 'package:ewallet/app/router/simple_navigator_observer.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ewallet/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:ewallet/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:ewallet/features/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,10 @@ class AppRouter {
       initialLocation: Routes.home.path,
       refreshListenable: GoRouteSteamToListenable(authBloc.stream),
       redirect: (context, state) {
-        final allowUnauthenticatedRoutes = [Routes.login.path];
+        final allowUnauthenticatedRoutes = [
+          Routes.login.path,
+          Routes.signUp.path,
+        ];
         final isAuthenticated = authBloc.state is AuthSuccess;
         final isAuthVerified = authBloc.state is AuthUnverified;
         final isOnAllowedPages = allowUnauthenticatedRoutes.contains(
@@ -42,6 +46,11 @@ class AppRouter {
           path: Routes.login.path,
           name: Routes.login.name,
           builder: (context, state) => SignInPage(),
+        ),
+        GoRoute(
+          path: Routes.signUp.path,
+          name: Routes.signUp.name,
+          builder: (context, state) => SignUpPage(),
         ),
       ],
     );

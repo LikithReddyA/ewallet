@@ -4,12 +4,30 @@ import 'package:ewallet/features/auth/data/datasources/auth_datasource.dart';
 import 'package:ewallet/features/auth/domain/entities/auth_user.dart';
 import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
 import 'package:ewallet/features/auth/domain/usecases/sign_in_params.dart';
+import 'package:ewallet/features/auth/domain/usecases/sign_up_params.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthDatasource authDatasource;
 
   AuthRepositoryImpl({required this.authDatasource});
+
+  @override
+  Future<Either<Failure, AuthUser>> signUp(SignUpParams params) async {
+    try {
+      final model = await authDatasource.signUp(
+        params.emailId,
+        params.password,
+      );
+      return Right(model.toEntity());
+    } on FirebaseAuthException catch (e) {
+      return Left(ServerFailure(serverFailureMessage: e.code));
+    } catch (e) {
+      return Left(
+        ServerFailure(serverFailureMessage: "User couldn't be created!"),
+      );
+    }
+  }
 
   @override
   Future<Either<Failure, AuthUser>> signIn(SignInParams params) async {
