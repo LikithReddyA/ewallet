@@ -9,7 +9,13 @@ class AuthInitial extends AuthState {}
 
 class AuthInProgress extends AuthState {}
 
-class AuthUnverified extends AuthState {}
+class AuthUnverified extends AuthState {
+  final AuthUser authUser;
+
+  AuthUnverified({required this.authUser});
+  @override
+  List<Object?> get props => [authUser];
+}
 
 class AuthSuccess extends AuthState {
   final AuthUser authUser;

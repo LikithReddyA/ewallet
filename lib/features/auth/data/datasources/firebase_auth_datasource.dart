@@ -6,6 +6,22 @@ class FirebaseAuthDatasource implements AuthDatasource {
   final FirebaseAuth firebaseAuth;
 
   FirebaseAuthDatasource({required this.firebaseAuth});
+
+  @override
+  Future<AuthUserModel> signUp(String emailId, String password) async {
+    try {
+      UserCredential userCredential = await firebaseAuth
+          .createUserWithEmailAndPassword(email: emailId, password: password);
+      if (userCredential.user != null) {
+        return AuthUserModel.fromFirebase(userCredential.user!);
+      } else {
+        throw FirebaseAuthException(code: "null-user");
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   @override
   Future<AuthUserModel> signIn(String emailId, String password) async {
     try {

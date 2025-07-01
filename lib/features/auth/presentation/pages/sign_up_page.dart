@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,25 +57,25 @@ class SignInPage extends StatelessWidget {
                       TextButton(
                         onPressed: () {
                           context.read<AuthBloc>().add(
-                            SignInRequested(
+                            SignUpRequested(
                               emailId: emailController.text,
                               password: passwordController.text,
                             ),
                           );
                         },
-                        child: Text("SignIn"),
+                        child: Text("Sign Up"),
                       ),
                       SizedBox(height: ViewConstatnts.widgetsHeightGap),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("If you don't have an account?"),
+                          Text("If you already have an account?"),
                           SizedBox(width: ViewConstatnts.widgetsHeightGap),
                           TextButton(
                             onPressed: () {
-                              context.goNamed(Routes.signUp.name);
+                              context.goNamed(Routes.login.name);
                             },
-                            child: Text("Create Account"),
+                            child: Text("Login!"),
                           ),
                         ],
                       ),
