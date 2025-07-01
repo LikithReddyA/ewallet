@@ -61,4 +61,38 @@ class FirebaseAuthDatasource implements AuthDatasource {
       rethrow;
     }
   }
+
+  @override
+  Future<void> sendVerificationEmail() async {
+    try {
+      await firebaseAuth.currentUser?.reload();
+      final user = firebaseAuth.currentUser;
+      if (user != null) {
+        if (!user.emailVerified) {
+          await user.sendEmailVerification();
+        } else {
+          throw FirebaseAuthException(code: "already-verified-user");
+        }
+      } else {
+        throw FirebaseAuthException(code: "null-user");
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AuthUserModel> getCurrentUser() async {
+    try {
+      await firebaseAuth.currentUser?.reload();
+      final user = firebaseAuth.currentUser;
+      if (user != null) {
+        return AuthUserModel.fromFirebase(user);
+      } else {
+        throw FirebaseAuthException(code: "null-user");
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

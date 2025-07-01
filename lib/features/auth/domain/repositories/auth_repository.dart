@@ -9,4 +9,6 @@ abstract class AuthRepository {
   Future<Either<Failure, AuthUser>> signIn(SignInParams params);
   Future<Either<Failure, void>> signOut();
   Future<Either<Failure, Stream<AuthUser?>>> getAuthUser();
+  Future<Either<Failure, void>> sendVerificationEmail();
+  Future<Either<Failure, AuthUser>> getCurrentUser();
 }

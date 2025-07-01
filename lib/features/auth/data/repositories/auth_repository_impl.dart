@@ -71,4 +71,33 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(ServerFailure(serverFailureMessage: "Something went wrong!"));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> sendVerificationEmail() async {
+    try {
+      await authDatasource.sendVerificationEmail();
+      // ignore: void_checks
+      return Right(unit);
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthFailure(firebaseFailureMessage: e.code));
+    } catch (e) {
+      return Left(
+        ServerFailure(serverFailureMessage: "Couldn't send verification email"),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, AuthUser>> getCurrentUser() async {
+    try {
+      final model = await authDatasource.getCurrentUser();
+      return Right(model.toEntity());
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthFailure(firebaseFailureMessage: e.code));
+    } catch (e) {
+      return Left(
+        ServerFailure(serverFailureMessage: "Couldn't get current user!"),
+      );
+    }
+  }
 }
