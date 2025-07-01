@@ -31,4 +31,18 @@ class FirebaseAuthDatasource implements AuthDatasource {
       rethrow;
     }
   }
+
+  @override
+  Stream<AuthUserModel?> getAuthUser() {
+    try {
+      return firebaseAuth.authStateChanges().map((firebaseUser) {
+        if (firebaseUser != null) {
+          return AuthUserModel.fromFirebase(firebaseUser);
+        }
+        return null;
+      });
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

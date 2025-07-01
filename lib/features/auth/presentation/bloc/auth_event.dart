@@ -16,3 +16,12 @@ class SignInRequested extends AuthEvent {
 }
 
 class SignOutRequested extends AuthEvent {}
+
+class AuthUserChanged extends AuthEvent {
+  final AuthUser? authUser;
+
+  AuthUserChanged({required this.authUser});
+
+  @override
+  List<Object?> get props => [authUser];
+}

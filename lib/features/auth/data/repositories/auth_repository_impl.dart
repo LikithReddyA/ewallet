@@ -30,6 +30,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, void>> signOut() async {
     try {
       await authDatasource.signOut();
+      // ignore: void_checks
       return Right(unit);
     } catch (e) {
       return Left(
@@ -37,6 +38,19 @@ class AuthRepositoryImpl implements AuthRepository {
           serverFailureMessage: "Sign out failed for unkown reason",
         ),
       );
+    }
+  }
+
+  @override
+  Future<Either<Failure, Stream<AuthUser?>>> getAuthUser() async {
+    try {
+      return Right(
+        authDatasource.getAuthUser().map((model) {
+          return model?.toEntity();
+        }),
+      );
+    } catch (e) {
+      return Left(ServerFailure(serverFailureMessage: "Something went wrong!"));
     }
   }
 }

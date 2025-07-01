@@ -2,6 +2,7 @@ import 'package:ewallet/features/auth/data/datasources/auth_datasource.dart';
 import 'package:ewallet/features/auth/data/datasources/firebase_auth_datasource.dart';
 import 'package:ewallet/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
+import 'package:ewallet/features/auth/domain/usecases/get_auth_user.dart';
 import 'package:ewallet/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
@@ -23,11 +24,15 @@ void authDI(GetIt sl) {
   sl.registerLazySingleton<SignOutUsecase>(
     () => SignOutUsecase(authRepository: sl<AuthRepository>()),
   );
+  sl.registerLazySingleton<GetAuthUser>(
+    () => GetAuthUser(authRepository: sl<AuthRepository>()),
+  );
 
   sl.registerFactory<AuthBloc>(
     () => AuthBloc(
       signInUsecase: sl<SignInUsecase>(),
       signOutUsecase: sl<SignOutUsecase>(),
+      getAuthUser: sl<GetAuthUser>(),
     ),
   );
 }
