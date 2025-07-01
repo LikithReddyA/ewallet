@@ -5,4 +5,6 @@ abstract class AuthDatasource {
   Future<AuthUserModel> signIn(String emailId, String password);
   Future<void> signOut();
   Stream<AuthUserModel?> getAuthUser();
+  Future<void> sendVerificationEmail();
+  Future<AuthUserModel> getCurrentUser();
 }

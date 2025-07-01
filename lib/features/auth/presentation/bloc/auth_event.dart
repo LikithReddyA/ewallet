@@ -35,3 +35,7 @@ class AuthUserChanged extends AuthEvent {
   @override
   List<Object?> get props => [authUser];
 }
+
+class EmailVerificationRequested extends AuthEvent {}
+
+class CheckVerificationStatus extends AuthEvent {}

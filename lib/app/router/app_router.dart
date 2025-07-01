@@ -4,6 +4,7 @@ import 'package:ewallet/app/router/simple_navigator_observer.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ewallet/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:ewallet/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:ewallet/features/auth/presentation/pages/user_verification_page.dart';
 import 'package:ewallet/features/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,18 +23,27 @@ class AppRouter {
           Routes.signUp.path,
         ];
         final isAuthenticated = authBloc.state is AuthSuccess;
-        final isAuthVerified = authBloc.state is AuthUnverified;
+        final isAuthUnverified = authBloc.state is AuthUnverified;
+        final isUnAuthenticated = authBloc.state is AuthUnAuthenticated;
         final isOnAllowedPages = allowUnauthenticatedRoutes.contains(
           state.matchedLocation,
         );
+        final isOnVerificationPage =
+            state.matchedLocation == Routes.verificationPage.path;
 
-        if (!(isAuthenticated || isAuthVerified) && !isOnAllowedPages) {
+        if (isUnAuthenticated && !isOnAllowedPages) {
           return Routes.login.path;
-        } else if ((isAuthenticated || isAuthVerified) && isOnAllowedPages) {
-          return Routes.home.path;
-        } else {
-          return null;
         }
+        if (isAuthUnverified && !isOnVerificationPage) {
+          return Routes.verificationPage.path;
+        }
+        if (isAuthenticated && isOnVerificationPage) {
+          return Routes.home.path;
+        }
+        if (isAuthenticated && isOnAllowedPages) {
+          return Routes.home.path;
+        }
+        return null;
       },
       observers: [observer],
       routes: [
@@ -51,6 +61,11 @@ class AppRouter {
           path: Routes.signUp.path,
           name: Routes.signUp.name,
           builder: (context, state) => SignUpPage(),
+        ),
+        GoRoute(
+          path: Routes.verificationPage.path,
+          name: Routes.verificationPage.name,
+          builder: (context, state) => UserVerificationPage(),
         ),
       ],
     );
