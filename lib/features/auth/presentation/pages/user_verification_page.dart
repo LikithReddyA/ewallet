@@ -1,6 +1,7 @@
 import 'package:ewallet/core/constants/view_constatnts.dart';
+import 'package:ewallet/core/utils/helpers/ui_helpers.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:ewallet/shared/widgets/loader_widget.dart';
+import 'package:ewallet/core/utils/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,12 +36,7 @@ class UserVerificationPage extends StatelessWidget {
                 },
                 listener: (context, state) {
                   if (state is AuthUnverified) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("User is not verified!"),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
+                    showCustomSnackBar(context, "User is not verified!");
                   }
                 },
               ),
