@@ -1,6 +1,8 @@
+import 'package:ewallet/app/router/routes.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,7 +20,14 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(child: Text("Homepage")),
+      body: Center(
+        child: TextButton(
+          onPressed: () {
+            context.goNamed(Routes.createProfilePage.name);
+          },
+          child: Text("Create Profile Page"),
+        ),
+      ),
     );
   }
 }

@@ -1,11 +1,14 @@
 import 'package:ewallet/app/router/go_route_steam_to_listenable.dart';
 import 'package:ewallet/app/router/routes.dart';
 import 'package:ewallet/app/router/simple_navigator_observer.dart';
+import 'package:ewallet/bootstrap/dependency_injection.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ewallet/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:ewallet/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:ewallet/features/auth/presentation/pages/user_verification_page.dart';
 import 'package:ewallet/features/home/presentation/pages/home_page.dart';
+import 'package:ewallet/features/profile/presentation/blocs/user_profile_bloc.dart';
+import 'package:ewallet/features/profile/presentation/pages/create_user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -66,6 +69,16 @@ class AppRouter {
           path: Routes.verificationPage.path,
           name: Routes.verificationPage.name,
           builder: (context, state) => UserVerificationPage(),
+        ),
+        GoRoute(
+          path: Routes.createProfilePage.path,
+          name: Routes.createProfilePage.name,
+          pageBuilder: (context, state) => MaterialPage(
+            child: BlocProvider(
+              create: (context) => sl<UserProfileBloc>(),
+              child: CreateUserProfilePage(),
+            ),
+          ),
         ),
       ],
     );
