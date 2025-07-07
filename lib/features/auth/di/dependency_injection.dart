@@ -40,7 +40,7 @@ void authDI(GetIt sl) {
     () => GetCurrentUser(authRepository: sl<AuthRepository>()),
   );
 
-  sl.registerFactory<AuthBloc>(
+  sl.registerLazySingleton<AuthBloc>(
     () => AuthBloc(
       signUpUsecase: sl<SignUpUsecase>(),
       signInUsecase: sl<SignInUsecase>(),

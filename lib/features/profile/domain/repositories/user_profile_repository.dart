@@ -6,4 +6,5 @@ abstract class UserProfileRepository {
   Future<Either<Failure, void>> createUserProfile(
     CreateUserProfileParams params,
   );
+  Future<Either<Failure, bool>> isProfileCreated(String userId);
 }

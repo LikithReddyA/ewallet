@@ -32,4 +32,16 @@ class UserProfileRepositoryImpl implements UserProfileRepository {
       return Left(ServerFailure(serverFailureMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> isProfileCreated(String userId) async {
+    try {
+      final status = await userProfileDatasource.isProfileCreated(userId);
+      return Right(status);
+    } on FirebaseException catch (e) {
+      return Left(FirestoreFailure(firestoreFailureMessage: e.code));
+    } catch (e) {
+      return Left(ServerFailure(serverFailureMessage: e.toString()));
+    }
+  }
 }

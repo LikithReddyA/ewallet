@@ -37,4 +37,15 @@ class FirebaseUserprofileDatasource implements UserProfileDatasource {
       await docReference.set(userProfileModel.toJson());
     }
   }
+
+  @override
+  Future<bool> isProfileCreated(String userId) async {
+    final docReference = firebaseFirestore.collection("profiles").doc(userId);
+    final snapshot = await docReference.get();
+    if (snapshot.exists) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

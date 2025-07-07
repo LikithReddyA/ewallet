@@ -27,40 +27,46 @@ class CreateUserProfilePage extends StatelessWidget {
             if (state is UserProfileInprogress) {
               return LoaderWidget();
             }
-            return TextButton(
-              onPressed: () {
-                context.read<UserProfileBloc>().add(
-                  UserProfileCreation(
-                    username: "A Likith Reddy",
-                    dob: DateTime.now(),
-                    sources: [
-                      Source(
-                        sourceId: "123",
-                        name: "HDFC Bank",
-                        money: Money.inRupees(35003),
-                      ),
-                    ],
-                    incomeCategories: [
-                      Category(
-                        categoryId: '123',
-                        iconKey: 'heartPulse',
-                        categoryName: 'Health',
-                        categoryType: CategoryType.income,
-                      ),
-                    ],
-                    expenseCategories: [
-                      Category(
-                        categoryId: "1234",
-                        iconKey: 'food',
-                        categoryName: 'food',
-                        categoryType: CategoryType.expense,
-                      ),
-                    ],
-                  ),
-                );
-              },
-              child: Text("create profile"),
-            );
+            if (state is UserProfileSuccess) {
+              return Text("Profile already created");
+            }
+            if (state is UserProfileNotCreated) {
+              return TextButton(
+                onPressed: () {
+                  context.read<UserProfileBloc>().add(
+                    UserProfileCreation(
+                      username: "A Likith Reddy",
+                      dob: DateTime.now(),
+                      sources: [
+                        Source(
+                          sourceId: "123",
+                          name: "HDFC Bank",
+                          money: Money.inRupees(35003),
+                        ),
+                      ],
+                      incomeCategories: [
+                        Category(
+                          categoryId: '123',
+                          iconKey: 'heartPulse',
+                          categoryName: 'Health',
+                          categoryType: CategoryType.income,
+                        ),
+                      ],
+                      expenseCategories: [
+                        Category(
+                          categoryId: "1234",
+                          iconKey: 'food',
+                          categoryName: 'food',
+                          categoryType: CategoryType.expense,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                child: Text("create profile"),
+              );
+            }
+            return Text("Something wrong with profile!");
           },
         ),
       ),

@@ -10,4 +10,6 @@ abstract class UserProfileDatasource {
     List<CategoryModel> incomeCategories,
     List<CategoryModel> expenseCategories,
   );
+
+  Future<bool> isProfileCreated(String userId);
 }

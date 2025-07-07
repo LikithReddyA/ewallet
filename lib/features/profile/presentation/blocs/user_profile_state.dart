@@ -18,4 +18,8 @@ class UserProfileFailure extends UserProfileState {
   List<Object?> get props => [message];
 }
 
+class UserProfileNotCreated extends UserProfileState {}
+
+class UserProfileSuccess extends UserProfileState {}
+
 class CreateUserProfileSuccess extends UserProfileState {}

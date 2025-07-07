@@ -29,3 +29,5 @@ class UserProfileCreation extends UserProfileEvent {
     expenseCategories,
   ];
 }
+
+class IsProfileCreated extends UserProfileEvent {}
