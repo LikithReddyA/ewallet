@@ -24,7 +24,6 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
   }) : super(UserProfileInitial()) {
     on<UserProfileCreation>(_onUserProfileCreation);
     on<IsProfileCreated>(_isProfileCreatedStatus);
-    add(IsProfileCreated());
   }
 
   FutureOr<void> _onUserProfileCreation(

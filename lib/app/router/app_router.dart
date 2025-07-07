@@ -1,14 +1,13 @@
 import 'package:ewallet/app/router/go_route_steam_to_listenable.dart';
 import 'package:ewallet/app/router/routes.dart';
 import 'package:ewallet/app/router/simple_navigator_observer.dart';
-import 'package:ewallet/bootstrap/dependency_injection.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ewallet/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:ewallet/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:ewallet/features/auth/presentation/pages/user_verification_page.dart';
 import 'package:ewallet/features/home/presentation/pages/home_page.dart';
-import 'package:ewallet/features/profile/presentation/blocs/user_profile_bloc.dart';
 import 'package:ewallet/features/profile/presentation/pages/create_user_profile_page.dart';
+import 'package:ewallet/features/profile/presentation/pages/profile_page_gateway.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -40,11 +39,8 @@ class AppRouter {
         if (isAuthUnverified && !isOnVerificationPage) {
           return Routes.verificationPage.path;
         }
-        if (isAuthenticated && isOnVerificationPage) {
-          return Routes.home.path;
-        }
-        if (isAuthenticated && isOnAllowedPages) {
-          return Routes.home.path;
+        if (isAuthenticated && (isOnVerificationPage || isOnAllowedPages)) {
+          return Routes.profilePageGateway.path;
         }
         return null;
       },
@@ -73,12 +69,13 @@ class AppRouter {
         GoRoute(
           path: Routes.createProfilePage.path,
           name: Routes.createProfilePage.name,
-          pageBuilder: (context, state) => MaterialPage(
-            child: BlocProvider(
-              create: (context) => sl<UserProfileBloc>(),
-              child: CreateUserProfilePage(),
-            ),
-          ),
+          builder: (context, state) => CreateUserProfilePage(),
+        ),
+
+        GoRoute(
+          path: Routes.profilePageGateway.path,
+          name: Routes.profilePageGateway.name,
+          builder: (context, state) => ProfilePageGateway(),
         ),
       ],
     );
