@@ -14,21 +14,21 @@ class IconMapper {
     'clothing': FontAwesomeIcons.shirt,
     'home': FontAwesomeIcons.house,
     'travel': FontAwesomeIcons.plane,
-    'gifts': FontAwesomeIcons.gift,
-    'subscription': FontAwesomeIcons.spotify,
+    'gift': FontAwesomeIcons.gift,
+    'subscriptions': FontAwesomeIcons.spotify,
     'pets': FontAwesomeIcons.dog,
-    'others_expense': FontAwesomeIcons.ellipsis,
+    'charity': FontAwesomeIcons.handHoldingHeart,
+    'others_expense': FontAwesomeIcons.circleQuestion,
 
     // INCOME CATEGORIES
     'salary': FontAwesomeIcons.moneyBill,
     'bonus': FontAwesomeIcons.handHoldingDollar,
     'freelance': FontAwesomeIcons.laptopCode,
     'investment': FontAwesomeIcons.chartLine,
-    'rental_income': FontAwesomeIcons.building,
-    'gift_received': FontAwesomeIcons.gift,
+    'rental': FontAwesomeIcons.building,
     'sale': FontAwesomeIcons.tags,
     'refund': FontAwesomeIcons.rotateLeft,
-    'others_income': FontAwesomeIcons.coins,
+    'others_income': FontAwesomeIcons.circleQuestion,
   };
 
   static IconData getIcon(String key) {
