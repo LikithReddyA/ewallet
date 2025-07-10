@@ -72,7 +72,6 @@ class AppRouter {
           name: Routes.createProfilePage.name,
           builder: (context, state) => CreateUserProfilePage(),
         ),
-
         GoRoute(
           path: Routes.profilePageGateway.path,
           name: Routes.profilePageGateway.name,
