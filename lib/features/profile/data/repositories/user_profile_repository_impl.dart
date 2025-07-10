@@ -21,8 +21,7 @@ class UserProfileRepositoryImpl implements UserProfileRepository {
         params.username,
         params.dob.toIso8601String(),
         SourceMapper.toModelList(params.sources),
-        CategoryMapper.toModelList(params.incomeCategories),
-        CategoryMapper.toModelList(params.expenseCategories),
+        CategoryMapper.toModelList(params.categories),
       );
       // ignore: void_checks
       return Right(unit);

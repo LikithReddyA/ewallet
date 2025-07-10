@@ -10,12 +10,7 @@ class UserProfileMapper {
       userName: userProfile.userName,
       dob: userProfile.dob.toIso8601String(),
       sources: SourceMapper.toModelList(userProfile.sources),
-      incomeCategories: CategoryMapper.toModelList(
-        userProfile.incomeCategories,
-      ),
-      expenseCategories: CategoryMapper.toModelList(
-        userProfile.expenseCategories,
-      ),
+      categories: CategoryMapper.toModelList(userProfile.categories),
     );
   }
 
@@ -25,12 +20,7 @@ class UserProfileMapper {
       userName: userProfileModel.userName,
       dob: DateTime.parse(userProfileModel.dob),
       sources: SourceMapper.toEntityList(userProfileModel.sources),
-      incomeCategories: CategoryMapper.toEntityList(
-        userProfileModel.incomeCategories,
-      ),
-      expenseCategories: CategoryMapper.toEntityList(
-        userProfileModel.expenseCategories,
-      ),
+      categories: CategoryMapper.toEntityList(userProfileModel.categories),
     );
   }
 }

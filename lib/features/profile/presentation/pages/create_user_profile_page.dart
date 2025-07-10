@@ -121,13 +121,14 @@ class _CreateUserProfilePageState extends State<CreateUserProfilePage> {
               if (sources.isNotEmpty &&
                   selectedIncomeCategories.isNotEmpty &&
                   selectedExpenseCategories.isNotEmpty) {
+                final categories = selectedIncomeCategories;
+                categories.addAll(selectedExpenseCategories);
                 context.read<UserProfileBloc>().add(
                   UserProfileCreation(
                     username: nameController.text,
                     dob: pickedDate!,
                     sources: sources,
-                    incomeCategories: selectedIncomeCategories,
-                    expenseCategories: selectedExpenseCategories,
+                    categories: categories,
                   ),
                 );
               }

@@ -7,25 +7,16 @@ class UserProfile extends Equatable {
   final String userName;
   final DateTime dob;
   final List<Source> sources;
-  final List<Category> incomeCategories;
-  final List<Category> expenseCategories;
+  final List<Category> categories;
 
   const UserProfile({
     required this.userId,
     required this.userName,
     required this.dob,
     required this.sources,
-    required this.incomeCategories,
-    required this.expenseCategories,
+    required this.categories,
   });
 
   @override
-  List<Object?> get props => [
-    userId,
-    userName,
-    dob,
-    sources,
-    incomeCategories,
-    expenseCategories,
-  ];
+  List<Object?> get props => [userId, userName, dob, sources, categories];
 }

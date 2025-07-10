@@ -40,8 +40,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
           username: event.username,
           dob: event.dob,
           sources: event.sources,
-          incomeCategories: event.incomeCategories,
-          expenseCategories: event.expenseCategories,
+          categories: event.categories,
         ),
       );
 

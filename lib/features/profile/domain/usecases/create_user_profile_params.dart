@@ -6,15 +6,13 @@ class CreateUserProfileParams {
   final String username;
   final DateTime dob;
   final List<Source> sources;
-  final List<Category> incomeCategories;
-  final List<Category> expenseCategories;
+  final List<Category> categories;
 
   const CreateUserProfileParams({
     required this.userId,
     required this.username,
     required this.dob,
     required this.sources,
-    required this.incomeCategories,
-    required this.expenseCategories,
+    required this.categories,
   });
 }

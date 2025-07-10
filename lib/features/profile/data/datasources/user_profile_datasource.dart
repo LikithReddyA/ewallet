@@ -7,8 +7,7 @@ abstract class UserProfileDatasource {
     String userName,
     String dob,
     List<SourceModel> sources,
-    List<CategoryModel> incomeCategories,
-    List<CategoryModel> expenseCategories,
+    List<CategoryModel> categories,
   );
 
   Future<bool> isProfileCreated(String userId);

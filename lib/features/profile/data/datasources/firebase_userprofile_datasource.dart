@@ -15,8 +15,7 @@ class FirebaseUserprofileDatasource implements UserProfileDatasource {
     String userName,
     String dob,
     List<SourceModel> sources,
-    List<CategoryModel> incomeCategories,
-    List<CategoryModel> expenseCategories,
+    List<CategoryModel> categories,
   ) async {
     final docReference = firebaseFirestore.collection("profiles").doc(userId);
     final snapshot = await docReference.get();
@@ -31,8 +30,7 @@ class FirebaseUserprofileDatasource implements UserProfileDatasource {
         userName: userName,
         dob: dob,
         sources: sources,
-        incomeCategories: incomeCategories,
-        expenseCategories: expenseCategories,
+        categories: categories,
       );
       await docReference.set(userProfileModel.toJson());
     }

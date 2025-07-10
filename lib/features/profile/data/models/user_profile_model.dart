@@ -7,16 +7,14 @@ class UserProfileModel extends Equatable {
   final String userName;
   final String dob;
   final List<SourceModel> sources;
-  final List<CategoryModel> incomeCategories;
-  final List<CategoryModel> expenseCategories;
+  final List<CategoryModel> categories;
 
   const UserProfileModel({
     required this.userId,
     required this.userName,
     required this.dob,
     required this.sources,
-    required this.incomeCategories,
-    required this.expenseCategories,
+    required this.categories,
   });
 
   factory UserProfileModel.fromJson(Map<String, dynamic> doc) {
@@ -27,10 +25,7 @@ class UserProfileModel extends Equatable {
       sources: (doc['sources'] as List<dynamic>? ?? [])
           .map((sourceModel) => SourceModel.fromJson(sourceModel))
           .toList(),
-      incomeCategories: (doc['incomeCategories'] as List<dynamic>? ?? [])
-          .map((categoryModel) => CategoryModel.fromJson(categoryModel))
-          .toList(),
-      expenseCategories: (doc['expenseCategories'] as List<dynamic>? ?? [])
+      categories: (doc['categories'] as List<dynamic>? ?? [])
           .map((categoryModel) => CategoryModel.fromJson(categoryModel))
           .toList(),
     );
@@ -42,22 +37,12 @@ class UserProfileModel extends Equatable {
       'userName': userName,
       'dob': dob,
       'sources': sources.map((sourceModel) => sourceModel.toJson()).toList(),
-      'incomeCategories': incomeCategories
-          .map((categoryModel) => categoryModel.toJson())
-          .toList(),
-      'expenseCategories': expenseCategories
+      'categories': categories
           .map((categoryModel) => categoryModel.toJson())
           .toList(),
     };
   }
 
   @override
-  List<Object?> get props => [
-    userId,
-    userName,
-    dob,
-    sources,
-    incomeCategories,
-    expenseCategories,
-  ];
+  List<Object?> get props => [userId, userName, dob, sources, categories];
 }

@@ -9,25 +9,17 @@ class UserProfileCreation extends UserProfileEvent {
   final String username;
   final DateTime dob;
   final List<Source> sources;
-  final List<Category> incomeCategories;
-  final List<Category> expenseCategories;
+  final List<Category> categories;
 
   UserProfileCreation({
     required this.username,
     required this.dob,
     required this.sources,
-    required this.incomeCategories,
-    required this.expenseCategories,
+    required this.categories,
   });
 
   @override
-  List<Object?> get props => [
-    username,
-    dob,
-    sources,
-    incomeCategories,
-    expenseCategories,
-  ];
+  List<Object?> get props => [username, dob, sources, categories];
 }
 
 class IsProfileCreated extends UserProfileEvent {}
