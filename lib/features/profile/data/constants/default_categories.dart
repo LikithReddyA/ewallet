@@ -1,0 +1,148 @@
+import 'package:ewallet/core/utils/helpers/id_generator.dart';
+import 'package:ewallet/features/shared/domain/entities/category.dart';
+
+final List<Category> incomeCategories = [
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'salary',
+    categoryName: 'Salary',
+    categoryType: CategoryType.income,
+    colorHex: 0xFF4CAF50,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'freelance',
+    categoryName: 'Freelance',
+    categoryType: CategoryType.income,
+    colorHex: 0xFF81C784,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'investment',
+    categoryName: 'Investment',
+    categoryType: CategoryType.income,
+    colorHex: 0xFF64B5F6,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'rental',
+    categoryName: 'Rental Income',
+    categoryType: CategoryType.income,
+    colorHex: 0xFFFFB74D,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'bonus',
+    categoryName: 'Bonus',
+    categoryType: CategoryType.income,
+    colorHex: 0xFFFF8A65,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'gift',
+    categoryName: 'Gift Received',
+    categoryType: CategoryType.income,
+    colorHex: 0xFFBA68C8,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'sale',
+    categoryName: 'Sales',
+    categoryType: CategoryType.income,
+    colorHex: 0xFFA1887F,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'refund',
+    categoryName: 'Refunds',
+    categoryType: CategoryType.income,
+    colorHex: 0xFF90A4AE,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'others_income',
+    categoryName: 'Others',
+    categoryType: CategoryType.income,
+    colorHex: 0xFF9E9E9E,
+  ),
+];
+
+final List<Category> expenseCategories = [
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'food',
+    categoryName: 'Food & Drinks',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFFF44336,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'shopping',
+    categoryName: 'Shopping',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFFE91E63,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'transport',
+    categoryName: 'Transport',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFF9C27B0,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'health',
+    categoryName: 'Health',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFF3F51B5,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'entertainment',
+    categoryName: 'Entertainment',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFF2196F3,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'bills',
+    categoryName: 'Bills',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFFFF9800,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'education',
+    categoryName: 'Education',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFF00BCD4,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'subscriptions',
+    categoryName: 'Subscriptions',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFF4DB6AC,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'pets',
+    categoryName: 'Pets',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFF607D8B,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'charity',
+    categoryName: 'Charity',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFF6D4C41,
+  ),
+  Category(
+    categoryId: IdGenerator.id,
+    iconKey: 'others_expense',
+    categoryName: 'Others',
+    categoryType: CategoryType.expense,
+    colorHex: 0xFF9E9E9E,
+  ),
+];

@@ -18,6 +18,16 @@ class FirebaseAuthFailure extends Failure {
   List<Object?> get props => [message];
 }
 
+class FirestoreFailure extends Failure {
+  final String firestoreFailureMessage;
+
+  const FirestoreFailure({required this.firestoreFailureMessage})
+    : super(message: firestoreFailureMessage);
+
+  @override
+  List<Object?> get props => [firestoreFailureMessage];
+}
+
 class ServerFailure extends Failure {
   final String serverFailureMessage;
 
