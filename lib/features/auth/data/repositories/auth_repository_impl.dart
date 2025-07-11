@@ -100,4 +100,18 @@ class AuthRepositoryImpl implements AuthRepository {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, String>> getCurrentUserId() async {
+    try {
+      final userId = await authDatasource.getCurrentUserId();
+      return Right(userId);
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthFailure(firebaseFailureMessage: e.code));
+    } catch (e) {
+      return Left(
+        ServerFailure(serverFailureMessage: "Couldn't get current user!"),
+      );
+    }
+  }
 }

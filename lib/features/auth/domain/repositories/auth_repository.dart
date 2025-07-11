@@ -11,4 +11,5 @@ abstract class AuthRepository {
   Future<Either<Failure, Stream<AuthUser?>>> getAuthUser();
   Future<Either<Failure, void>> sendVerificationEmail();
   Future<Either<Failure, AuthUser>> getCurrentUser();
+  Future<Either<Failure, String>> getCurrentUserId();
 }

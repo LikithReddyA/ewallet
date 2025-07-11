@@ -7,4 +7,5 @@ abstract class AuthDatasource {
   Stream<AuthUserModel?> getAuthUser();
   Future<void> sendVerificationEmail();
   Future<AuthUserModel> getCurrentUser();
+  Future<String> getCurrentUserId();
 }
