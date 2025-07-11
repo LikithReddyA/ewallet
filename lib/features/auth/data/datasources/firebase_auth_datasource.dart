@@ -99,13 +99,7 @@ class FirebaseAuthDatasource implements AuthDatasource {
   @override
   Future<String> getCurrentUserId() async {
     try {
-      await firebaseAuth.currentUser?.reload();
-      final user = firebaseAuth.currentUser;
-      if (user != null) {
-        return user.uid;
-      } else {
-        throw FirebaseAuthException(code: "null-user");
-      }
+      return firebaseAuth.currentUser?.uid ?? "";
     } catch (e) {
       rethrow;
     }
