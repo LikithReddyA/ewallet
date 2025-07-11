@@ -4,7 +4,7 @@ import 'package:ewallet/features/shared/domain/entities/category.dart';
 
 enum TransactionType { income, expense, transfer }
 
-class Transaction extends Equatable {
+abstract class Transaction extends Equatable {
   final String id;
   final String title;
   final String? description;
