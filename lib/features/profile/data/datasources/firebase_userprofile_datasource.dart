@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ewallet/features/profile/data/datasources/user_profile_datasource.dart';
 import 'package:ewallet/features/profile/data/models/user_profile_model.dart';
-import 'package:ewallet/features/shared/data/models/category_model.dart';
-import 'package:ewallet/features/shared/data/models/source_model.dart';
 
 class FirebaseUserprofileDatasource implements UserProfileDatasource {
   final FirebaseFirestore firebaseFirestore;
@@ -14,8 +12,6 @@ class FirebaseUserprofileDatasource implements UserProfileDatasource {
     String userId,
     String userName,
     String dob,
-    List<SourceModel> sources,
-    List<CategoryModel> categories,
   ) async {
     final docReference = firebaseFirestore.collection("profiles").doc(userId);
     final snapshot = await docReference.get();
@@ -29,8 +25,6 @@ class FirebaseUserprofileDatasource implements UserProfileDatasource {
         userId: userId,
         userName: userName,
         dob: dob,
-        sources: sources,
-        categories: categories,
       );
       await docReference.set(userProfileModel.toJson());
     }

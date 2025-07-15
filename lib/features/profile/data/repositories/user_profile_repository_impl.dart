@@ -4,13 +4,19 @@ import 'package:ewallet/core/errors/failure.dart';
 import 'package:ewallet/features/profile/data/datasources/user_profile_datasource.dart';
 import 'package:ewallet/features/profile/domain/repositories/user_profile_repository.dart';
 import 'package:ewallet/features/profile/domain/usecases/create_user_profile_params.dart';
-import 'package:ewallet/features/shared/data/mapper/category_mapper.dart';
-import 'package:ewallet/features/shared/data/mapper/source_mapper.dart';
+import 'package:ewallet/features/shared/domain/repositories/category_repository.dart';
+import 'package:ewallet/features/shared/domain/repositories/source_repository.dart';
 
 class UserProfileRepositoryImpl implements UserProfileRepository {
   final UserProfileDatasource userProfileDatasource;
+  final SourceRepository sourceRepository;
+  final CategoryRepository categoryRepository;
 
-  UserProfileRepositoryImpl({required this.userProfileDatasource});
+  UserProfileRepositoryImpl({
+    required this.userProfileDatasource,
+    required this.sourceRepository,
+    required this.categoryRepository,
+  });
   @override
   Future<Either<Failure, void>> createUserProfile(
     CreateUserProfileParams params,
@@ -20,9 +26,13 @@ class UserProfileRepositoryImpl implements UserProfileRepository {
         params.userId,
         params.username,
         params.dob.toIso8601String(),
-        SourceMapper.toModelList(params.sources),
-        CategoryMapper.toModelList(params.categories),
       );
+      for (var source in params.sources) {
+        await sourceRepository.addSource(source);
+      }
+      for (var category in params.categories) {
+        await categoryRepository.addCategory(category);
+      }
       // ignore: void_checks
       return Right(unit);
     } on FirebaseException catch (e) {
