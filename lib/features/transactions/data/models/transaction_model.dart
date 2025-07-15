@@ -8,17 +8,17 @@ abstract class TransactionModel extends Equatable {
   final String createdAtDateTime;
   final String transactionDateTime;
   final String transactionType;
-  final String transactionCategory;
+  final String transactionCategoryId;
 
   const TransactionModel({
     required this.id,
     required this.title,
-    required this.description,
+    this.description,
     required this.amountInPaise,
     required this.createdAtDateTime,
     required this.transactionDateTime,
     required this.transactionType,
-    required this.transactionCategory,
+    required this.transactionCategoryId,
   });
 
   @override
@@ -30,6 +30,6 @@ abstract class TransactionModel extends Equatable {
     createdAtDateTime,
     transactionDateTime,
     transactionType,
-    transactionCategory,
+    transactionCategoryId,
   ];
 }
