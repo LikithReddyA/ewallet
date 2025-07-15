@@ -19,6 +19,7 @@ class SourceFirebaseDatasource implements SourceDatasource {
             .collection("sources")
             .doc(source.sourceId)
             .set(source.toJson(), SetOptions(merge: false));
+      } else {
         throw FirebaseException(
           plugin: "FirebaseFirestore",
           code: "user-profile-doesn't-exists",

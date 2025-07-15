@@ -6,6 +6,32 @@ class CateogryFirebaseDatasource implements CategoryDatasource {
   final FirebaseFirestore firebaseFirestore;
 
   CateogryFirebaseDatasource({required this.firebaseFirestore});
+
+  @override
+  Future<void> addCategory(CategoryModel categoryModel, String userId) async {
+    try {
+      final userProfileRef = firebaseFirestore
+          .collection("profiles")
+          .doc(userId);
+      final userProfile = await userProfileRef.get();
+      if (userProfile.exists) {
+        await firebaseFirestore
+            .collection("profiles")
+            .doc(userId)
+            .collection("categories")
+            .doc(categoryModel.categoryId)
+            .set(categoryModel.toJson(), SetOptions(merge: false));
+      } else {
+        throw FirebaseException(
+          plugin: "FirebaseFirestore",
+          code: "user-profile-doesn't-exists",
+        );
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   @override
   Future<CategoryModel> getCategoryById(
     String categoryId,
