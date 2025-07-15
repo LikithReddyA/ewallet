@@ -19,6 +19,14 @@ class SourceModel extends Equatable {
     );
   }
 
+  SourceModel copyWith({String? sourceId, String? name, int? amountInPaise}) {
+    return SourceModel(
+      sourceId: sourceId ?? this.sourceId,
+      name: name ?? this.name,
+      amountInPaise: amountInPaise ?? this.amountInPaise,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {'sourceId': sourceId, 'name': name, 'amountInPaise': amountInPaise};
   }
