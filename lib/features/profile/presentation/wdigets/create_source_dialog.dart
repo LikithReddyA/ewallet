@@ -1,6 +1,6 @@
 import 'package:ewallet/core/domain/entities/money.dart';
 import 'package:ewallet/core/utils/helpers/id_generator.dart';
-import 'package:ewallet/features/shared/domain/entities/source.dart';
+import 'package:ewallet/features/shared/source/domain/entities/source.dart';
 import 'package:flutter/material.dart';
 
 class CreateSourceDialog extends StatefulWidget {

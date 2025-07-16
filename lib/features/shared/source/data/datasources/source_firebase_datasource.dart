@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ewallet/features/shared/data/datasources/source_datasource.dart';
-import 'package:ewallet/features/shared/data/models/source_model.dart';
+import 'package:ewallet/features/shared/source/data/datasources/source_datasource.dart';
+import 'package:ewallet/features/shared/source/data/models/source_model.dart';
 
 class SourceFirebaseDatasource implements SourceDatasource {
   final FirebaseFirestore firebaseFirestore;

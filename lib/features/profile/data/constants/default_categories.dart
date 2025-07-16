@@ -1,5 +1,5 @@
 import 'package:ewallet/core/utils/helpers/id_generator.dart';
-import 'package:ewallet/features/shared/domain/entities/category.dart';
+import 'package:ewallet/features/shared/category/domain/entities/category.dart';
 
 final List<Category> incomeCategories = [
   Category(

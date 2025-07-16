@@ -1,6 +1,6 @@
 import 'package:ewallet/core/utils/helpers/icon_mapper.dart';
 import 'package:ewallet/features/profile/data/constants/default_categories.dart';
-import 'package:ewallet/features/shared/domain/entities/category.dart';
+import 'package:ewallet/features/shared/category/domain/entities/category.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesStep extends StatelessWidget {

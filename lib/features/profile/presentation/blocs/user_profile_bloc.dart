@@ -5,8 +5,8 @@ import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ewallet/features/profile/domain/usecases/is_profile_created_usecase.dart';
 import 'package:ewallet/features/profile/domain/usecases/create_user_profile_params.dart';
 import 'package:ewallet/features/profile/domain/usecases/create_user_profile_usecase.dart';
-import 'package:ewallet/features/shared/domain/entities/category.dart';
-import 'package:ewallet/features/shared/domain/entities/source.dart';
+import 'package:ewallet/features/shared/category/domain/entities/category.dart';
+import 'package:ewallet/features/shared/source/domain/entities/source.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'user_profile_event.dart';

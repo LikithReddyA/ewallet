@@ -1,5 +1,5 @@
-import 'package:ewallet/features/shared/data/models/category_model.dart';
-import 'package:ewallet/features/shared/domain/entities/category.dart';
+import 'package:ewallet/features/shared/category/data/models/category_model.dart';
+import 'package:ewallet/features/shared/category/domain/entities/category.dart';
 
 class CategoryMapper {
   static CategoryModel toModel(Category category) {

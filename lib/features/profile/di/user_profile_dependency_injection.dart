@@ -7,8 +7,8 @@ import 'package:ewallet/features/profile/domain/repositories/user_profile_reposi
 import 'package:ewallet/features/profile/domain/usecases/create_user_profile_usecase.dart';
 import 'package:ewallet/features/profile/domain/usecases/is_profile_created_usecase.dart';
 import 'package:ewallet/features/profile/presentation/blocs/user_profile_bloc.dart';
-import 'package:ewallet/features/shared/domain/repositories/category_repository.dart';
-import 'package:ewallet/features/shared/domain/repositories/source_repository.dart';
+import 'package:ewallet/features/shared/category/domain/repositories/category_repository.dart';
+import 'package:ewallet/features/shared/source/domain/repositories/source_repository.dart';
 import 'package:get_it/get_it.dart';
 
 void userProfileDI(GetIt sl) {

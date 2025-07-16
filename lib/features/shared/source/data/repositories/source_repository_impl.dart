@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:ewallet/core/domain/entities/money.dart';
 import 'package:ewallet/core/errors/failure.dart';
 import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
-import 'package:ewallet/features/shared/data/datasources/source_datasource.dart';
-import 'package:ewallet/features/shared/data/mapper/source_mapper.dart';
-import 'package:ewallet/features/shared/domain/entities/source.dart';
-import 'package:ewallet/features/shared/domain/repositories/source_repository.dart';
+import 'package:ewallet/features/shared/source/data/datasources/source_datasource.dart';
+import 'package:ewallet/features/shared/source/data/mapper/source_mapper.dart';
+import 'package:ewallet/features/shared/source/domain/entities/source.dart';
+import 'package:ewallet/features/shared/source/domain/repositories/source_repository.dart';
 
 class SourceRepositoryImpl extends SourceRepository {
   final SourceDatasource sourceDatasource;

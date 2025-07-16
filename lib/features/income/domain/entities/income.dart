@@ -1,4 +1,4 @@
-import 'package:ewallet/features/shared/domain/entities/source.dart';
+import 'package:ewallet/features/shared/source/domain/entities/source.dart';
 import 'package:ewallet/features/transactions/domain/entities/transaction.dart';
 
 class Income extends Transaction {

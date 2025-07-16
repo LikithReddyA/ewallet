@@ -1,6 +1,6 @@
 import 'package:ewallet/core/domain/entities/money.dart';
-import 'package:ewallet/features/shared/domain/entities/category.dart';
-import 'package:ewallet/features/shared/domain/entities/source.dart';
+import 'package:ewallet/features/shared/category/domain/entities/category.dart';
+import 'package:ewallet/features/shared/source/domain/entities/source.dart';
 import 'package:ewallet/features/transactions/domain/entities/transaction.dart';
 
 class IncomeParams {

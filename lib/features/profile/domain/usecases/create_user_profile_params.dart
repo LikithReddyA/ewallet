@@ -1,5 +1,5 @@
-import 'package:ewallet/features/shared/domain/entities/category.dart';
-import 'package:ewallet/features/shared/domain/entities/source.dart';
+import 'package:ewallet/features/shared/category/domain/entities/category.dart';
+import 'package:ewallet/features/shared/source/domain/entities/source.dart';
 
 class CreateUserProfileParams {
   final String userId;

@@ -4,8 +4,8 @@ import 'package:ewallet/features/profile/presentation/blocs/user_profile_bloc.da
 import 'package:ewallet/features/profile/presentation/wdigets/categories_step.dart';
 import 'package:ewallet/features/profile/presentation/wdigets/personal_details_step.dart';
 import 'package:ewallet/features/profile/presentation/wdigets/sources_step.dart';
-import 'package:ewallet/features/shared/domain/entities/category.dart';
-import 'package:ewallet/features/shared/domain/entities/source.dart';
+import 'package:ewallet/features/shared/category/domain/entities/category.dart';
+import 'package:ewallet/features/shared/source/domain/entities/source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

@@ -4,8 +4,8 @@ import 'package:ewallet/core/errors/failure.dart';
 import 'package:ewallet/features/profile/data/datasources/user_profile_datasource.dart';
 import 'package:ewallet/features/profile/domain/repositories/user_profile_repository.dart';
 import 'package:ewallet/features/profile/domain/usecases/create_user_profile_params.dart';
-import 'package:ewallet/features/shared/domain/repositories/category_repository.dart';
-import 'package:ewallet/features/shared/domain/repositories/source_repository.dart';
+import 'package:ewallet/features/shared/category/domain/repositories/category_repository.dart';
+import 'package:ewallet/features/shared/source/domain/repositories/source_repository.dart';
 
 class UserProfileRepositoryImpl implements UserProfileRepository {
   final UserProfileDatasource userProfileDatasource;

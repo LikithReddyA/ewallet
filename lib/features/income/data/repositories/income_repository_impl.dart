@@ -6,7 +6,7 @@ import 'package:ewallet/features/income/data/mapper/income_mapper.dart';
 import 'package:ewallet/features/income/domain/entities/income.dart';
 import 'package:ewallet/features/income/domain/repositories/income_repository.dart';
 import 'package:ewallet/features/income/domain/usecases/income_params.dart';
-import 'package:ewallet/features/shared/domain/repositories/source_repository.dart';
+import 'package:ewallet/features/shared/source/domain/repositories/source_repository.dart';
 
 class IncomeRepositoryImpl implements IncomeRepository {
   final AuthRepository authRepository;

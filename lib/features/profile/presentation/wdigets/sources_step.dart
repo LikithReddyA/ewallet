@@ -1,6 +1,6 @@
 import 'package:ewallet/core/extensions/money_extension.dart';
 import 'package:ewallet/features/profile/presentation/wdigets/create_source_dialog.dart';
-import 'package:ewallet/features/shared/domain/entities/source.dart';
+import 'package:ewallet/features/shared/source/domain/entities/source.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

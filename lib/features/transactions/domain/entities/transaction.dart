@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:ewallet/core/domain/entities/money.dart';
-import 'package:ewallet/features/shared/domain/entities/category.dart';
+import 'package:ewallet/features/shared/category/domain/entities/category.dart';
 
 enum TransactionType { income, expense, transfer }
 

@@ -1,4 +1,4 @@
-import 'package:ewallet/features/shared/data/models/source_model.dart';
+import 'package:ewallet/features/shared/source/data/models/source_model.dart';
 
 abstract class SourceDatasource {
   Future<SourceModel> getSourceById(String sourceId, String userId);

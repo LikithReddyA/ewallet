@@ -1,6 +1,6 @@
 import 'package:ewallet/core/domain/entities/money.dart';
-import 'package:ewallet/features/shared/data/models/source_model.dart';
-import 'package:ewallet/features/shared/domain/entities/source.dart';
+import 'package:ewallet/features/shared/source/data/models/source_model.dart';
+import 'package:ewallet/features/shared/source/domain/entities/source.dart';
 
 class SourceMapper {
   static Source toEntity(SourceModel sourceModel) {
