@@ -23,9 +23,8 @@ class IncomeBloc extends Bloc<IncomeEvent, IncomeState> {
     emit(IncomeLoading());
     final result = await addIncomeUsecase(event.params);
     result.fold(
-      (failure) => AddIncomeError(message: failure.message!),
-      (_) => AddIncomeSuccess(),
+      (failure) => emit(AddIncomeError(message: failure.message!)),
+      (_) => emit(AddIncomeSuccess()),
     );
-    emit(AddIncomeSuccess());
   }
 }

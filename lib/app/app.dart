@@ -2,6 +2,7 @@ import 'package:ewallet/app/router/app_router.dart';
 import 'package:ewallet/app/themes/app_theme.dart';
 import 'package:ewallet/bootstrap/dependency_injection.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:ewallet/features/expense/presentation/bloc/expense_bloc.dart';
 import 'package:ewallet/features/income/presentation/bloc/income_bloc.dart';
 import 'package:ewallet/features/profile/presentation/blocs/user_profile_bloc.dart';
 import 'package:ewallet/features/shared/category/presentation/bloc/category_bloc.dart';
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => sl<SourceBloc>()),
         BlocProvider(create: (context) => sl<CategoryBloc>()),
         BlocProvider(create: (context) => sl<IncomeBloc>()),
+        BlocProvider(create: (context) => sl<ExpenseBloc>()),
       ],
       child: Builder(
         builder: (context) {

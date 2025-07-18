@@ -1,4 +1,5 @@
 import 'package:ewallet/app/router/routes.dart';
+import 'package:ewallet/features/expense/presentation/widgets/add_expense_dialog.dart';
 import 'package:ewallet/features/income/presentation/widgets/add_income_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -47,7 +48,19 @@ class NavBar extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ListTile(title: Text("Expense"), onTap: () {}),
+                    ListTile(
+                      title: Text("Expense"),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Future.delayed(Duration.zero, () {
+                          if (!context.mounted) return;
+                          showDialog(
+                            context: context,
+                            builder: (context) => AddExpenseDialog(),
+                          );
+                        });
+                      },
+                    ),
                     ListTile(
                       title: Text("Income"),
                       onTap: () {
