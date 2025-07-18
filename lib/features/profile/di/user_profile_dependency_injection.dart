@@ -12,8 +12,6 @@ import 'package:ewallet/features/shared/source/domain/repositories/source_reposi
 import 'package:get_it/get_it.dart';
 
 void userProfileDI(GetIt sl) {
-  sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
-
   sl.registerLazySingleton<UserProfileDatasource>(
     () => FirebaseUserprofileDatasource(
       firebaseFirestore: sl<FirebaseFirestore>(),

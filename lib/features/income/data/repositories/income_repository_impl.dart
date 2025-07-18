@@ -42,8 +42,9 @@ class IncomeRepositoryImpl implements IncomeRepository {
           Income(
             id: params.incomeId,
             title: params.title,
+            description: params.description,
             amount: params.amount,
-            createdAt: params.createdAt,
+            createdAt: DateTime.now(),
             transactionDate: params.transactionDate,
             transactionCategory: params.transactionCategory,
             transactionType: params.transactionType,

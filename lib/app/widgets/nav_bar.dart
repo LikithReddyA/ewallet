@@ -1,4 +1,5 @@
 import 'package:ewallet/app/router/routes.dart';
+import 'package:ewallet/features/income/presentation/widgets/add_income_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -44,9 +45,22 @@ class NavBar extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.all(16),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     ListTile(title: Text("Expense"), onTap: () {}),
-                    ListTile(title: Text("Income"), onTap: () {}),
+                    ListTile(
+                      title: Text("Income"),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Future.delayed(Duration.zero, () {
+                          if (!context.mounted) return;
+                          showDialog(
+                            context: context,
+                            builder: (context) => AddIncomeDialog(),
+                          );
+                        });
+                      },
+                    ),
                   ],
                 ),
               );

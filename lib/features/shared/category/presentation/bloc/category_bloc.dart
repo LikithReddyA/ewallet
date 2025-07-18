@@ -24,7 +24,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final result = await fetchCategoriesUsecase(event.categoryType);
     result.fold(
       (failure) => emit(CategoryFailure(message: failure.message!)),
-      (categories) => CategoriesSuccess(categories: categories),
+      (categories) => emit(CategoriesSuccess(categories: categories)),
     );
   }
 }

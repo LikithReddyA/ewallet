@@ -14,6 +14,7 @@ class IncomeMapper {
     return Income(
       id: incomeModel.id,
       title: incomeModel.title,
+      description: incomeModel.description,
       amount: Money.inPaise(incomeModel.amountInPaise),
       createdAt: DateTime.parse(incomeModel.createdAtDateTime),
       transactionDate: DateTime.parse(incomeModel.transactionDateTime),
@@ -27,6 +28,7 @@ class IncomeMapper {
     return IncomeModel(
       id: income.id,
       title: income.title,
+      description: income.description,
       amountInPaise: income.amount.amountInPaise,
       createdAtDateTime: income.createdAt.toIso8601String(),
       transactionDateTime: income.transactionDate.toIso8601String(),

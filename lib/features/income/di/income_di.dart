@@ -1,0 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
+import 'package:ewallet/features/income/data/datasources/firebase_income_datasource.dart';
+import 'package:ewallet/features/income/data/datasources/income_datasource.dart';
+import 'package:ewallet/features/income/data/repositories/income_repository_impl.dart';
+import 'package:ewallet/features/income/domain/repositories/income_repository.dart';
+import 'package:ewallet/features/income/domain/usecases/add_income_usecase.dart';
+import 'package:ewallet/features/income/presentation/bloc/income_bloc.dart';
+import 'package:ewallet/features/shared/source/domain/repositories/source_repository.dart';
+import 'package:get_it/get_it.dart';
+
+void incomeDI(GetIt sl) {
+  sl.registerLazySingleton<IncomeDatasource>(
+    () => FirebaseIncomeDatasource(firebaseFirestore: sl<FirebaseFirestore>()),
+  );
+  sl.registerLazySingleton<IncomeRepository>(
+    () => IncomeRepositoryImpl(
+      authRepository: sl<AuthRepository>(),
+      sourceRepository: sl<SourceRepository>(),
+      incomeDatasource: sl<IncomeDatasource>(),
+    ),
+  );
+
+  sl.registerLazySingleton<AddIncomeUsecase>(
+    () => AddIncomeUsecase(incomeRepository: sl<IncomeRepository>()),
+  );
+
+  sl.registerFactory<IncomeBloc>(
+    () => IncomeBloc(addIncomeUsecase: sl<AddIncomeUsecase>()),
+  );
+}
