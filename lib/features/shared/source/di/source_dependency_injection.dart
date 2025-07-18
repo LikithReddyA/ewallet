@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
+import 'package:ewallet/core/utils/helpers/firebase_helper.dart';
 import 'package:ewallet/features/shared/source/data/datasources/source_datasource.dart';
 import 'package:ewallet/features/shared/source/data/datasources/source_firebase_datasource.dart';
 import 'package:ewallet/features/shared/source/data/repositories/source_repository_impl.dart';
@@ -16,7 +16,7 @@ void sourceDI(GetIt sl) {
   sl.registerLazySingleton<SourceRepository>(
     () => SourceRepositoryImpl(
       sourceDatasource: sl<SourceDatasource>(),
-      authRepository: sl<AuthRepository>(),
+      firebaseHelper: sl<FirebaseHelper>(),
     ),
   );
 

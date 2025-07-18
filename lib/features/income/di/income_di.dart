@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
+import 'package:ewallet/core/utils/helpers/firebase_helper.dart';
 import 'package:ewallet/features/income/data/datasources/firebase_income_datasource.dart';
 import 'package:ewallet/features/income/data/datasources/income_datasource.dart';
 import 'package:ewallet/features/income/data/repositories/income_repository_impl.dart';
@@ -15,7 +15,7 @@ void incomeDI(GetIt sl) {
   );
   sl.registerLazySingleton<IncomeRepository>(
     () => IncomeRepositoryImpl(
-      authRepository: sl<AuthRepository>(),
+      firebaseHelper: sl<FirebaseHelper>(),
       sourceRepository: sl<SourceRepository>(),
       incomeDatasource: sl<IncomeDatasource>(),
     ),

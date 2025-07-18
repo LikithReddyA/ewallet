@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart' hide Source;
 import 'package:dartz/dartz.dart';
 import 'package:ewallet/core/domain/entities/money.dart';
 import 'package:ewallet/core/errors/failure.dart';
-import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
+import 'package:ewallet/core/utils/helpers/firebase_helper.dart';
 import 'package:ewallet/features/shared/source/data/datasources/source_datasource.dart';
 import 'package:ewallet/features/shared/source/data/mapper/source_mapper.dart';
 import 'package:ewallet/features/shared/source/domain/entities/source.dart';
@@ -10,22 +10,17 @@ import 'package:ewallet/features/shared/source/domain/repositories/source_reposi
 
 class SourceRepositoryImpl extends SourceRepository {
   final SourceDatasource sourceDatasource;
-  final AuthRepository authRepository;
+  final FirebaseHelper firebaseHelper;
 
   SourceRepositoryImpl({
     required this.sourceDatasource,
-    required this.authRepository,
+    required this.firebaseHelper,
   });
-
-  Future<String?> getCurrentUserId() async {
-    final result = await authRepository.getCurrentUserId();
-    return result.fold((failure) => null, (id) => id);
-  }
 
   @override
   Future<Either<Failure, void>> addSource(Source source) async {
     try {
-      final userId = await getCurrentUserId();
+      final userId = await firebaseHelper.getCurrentUserId();
 
       if (userId == null) {
         return Left(
@@ -45,7 +40,7 @@ class SourceRepositoryImpl extends SourceRepository {
   @override
   Future<Either<Failure, Source>> getSourceById(String sourceId) async {
     try {
-      final userId = await getCurrentUserId();
+      final userId = await firebaseHelper.getCurrentUserId();
 
       if (userId == null) {
         return Left(
@@ -69,7 +64,7 @@ class SourceRepositoryImpl extends SourceRepository {
   @override
   Future<Either<Failure, List<Source>>> getAllSources() async {
     try {
-      final userId = await getCurrentUserId();
+      final userId = await firebaseHelper.getCurrentUserId();
 
       if (userId == null) {
         return Left(
@@ -90,7 +85,7 @@ class SourceRepositoryImpl extends SourceRepository {
     Money amount,
   ) async {
     try {
-      final userId = await getCurrentUserId();
+      final userId = await firebaseHelper.getCurrentUserId();
 
       if (userId == null) {
         return Left(
@@ -112,7 +107,7 @@ class SourceRepositoryImpl extends SourceRepository {
     Money amount,
   ) async {
     try {
-      final userId = await getCurrentUserId();
+      final userId = await firebaseHelper.getCurrentUserId();
 
       if (userId == null) {
         return Left(

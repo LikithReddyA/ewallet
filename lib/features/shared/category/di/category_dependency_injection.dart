@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
+import 'package:ewallet/core/utils/helpers/firebase_helper.dart';
 import 'package:ewallet/features/shared/category/data/datasources/category_datasource.dart';
 import 'package:ewallet/features/shared/category/data/datasources/cateogry_firebase_datasource.dart';
 import 'package:ewallet/features/shared/category/data/repositories/category_repository_impl.dart';
@@ -17,7 +17,7 @@ void categoryDI(GetIt sl) {
   sl.registerLazySingleton<CategoryRepository>(
     () => CategoryRepositoryImpl(
       categoryDatasource: sl<CategoryDatasource>(),
-      authRepository: sl<AuthRepository>(),
+      firebaseHelper: sl<FirebaseHelper>(),
     ),
   );
 

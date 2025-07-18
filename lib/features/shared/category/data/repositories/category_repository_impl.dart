@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ewallet/core/errors/failure.dart';
-import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
+import 'package:ewallet/core/utils/helpers/firebase_helper.dart';
 import 'package:ewallet/features/shared/category/data/datasources/category_datasource.dart';
 import 'package:ewallet/features/shared/category/data/mapper/category_mapper.dart';
 import 'package:ewallet/features/shared/category/domain/entities/category.dart';
@@ -9,22 +9,17 @@ import 'package:ewallet/features/shared/category/domain/repositories/category_re
 
 class CategoryRepositoryImpl extends CategoryRepository {
   final CategoryDatasource categoryDatasource;
-  final AuthRepository authRepository;
+  final FirebaseHelper firebaseHelper;
 
   CategoryRepositoryImpl({
     required this.categoryDatasource,
-    required this.authRepository,
+    required this.firebaseHelper,
   });
-
-  Future<String?> getCurrentUserId() async {
-    final result = await authRepository.getCurrentUserId();
-    return result.fold((failure) => null, (id) => id);
-  }
 
   @override
   Future<Either<Failure, Category>> getCategoryById(String categoryId) async {
     try {
-      final userId = await getCurrentUserId();
+      final userId = await firebaseHelper.getCurrentUserId();
 
       if (userId == null) {
         return Left(
@@ -46,7 +41,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
   @override
   Future<Either<Failure, void>> addCategory(Category category) async {
     try {
-      final userId = await getCurrentUserId();
+      final userId = await firebaseHelper.getCurrentUserId();
 
       if (userId == null) {
         return Left(
@@ -71,7 +66,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
     CategoryType categoryType,
   ) async {
     try {
-      final userId = await getCurrentUserId();
+      final userId = await firebaseHelper.getCurrentUserId();
 
       if (userId == null) {
         return Left(
