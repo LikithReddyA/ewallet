@@ -12,7 +12,7 @@ import 'package:ewallet/features/profile/presentation/pages/create_user_profile_
 import 'package:ewallet/features/profile/presentation/pages/profile_page.dart';
 import 'package:ewallet/features/profile/presentation/pages/profile_page_gateway.dart';
 import 'package:ewallet/features/statistics/presentation/statistics_page.dart';
-import 'package:ewallet/features/transactions/presentation/transaction_page.dart';
+import 'package:ewallet/features/transactions/presentation/pages/transaction_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
