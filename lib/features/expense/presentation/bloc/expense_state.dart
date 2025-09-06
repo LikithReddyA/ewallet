@@ -9,12 +9,32 @@ class ExpenseInitial extends ExpenseState {}
 
 class ExpenseLoading extends ExpenseState {}
 
-class AddExpenseError extends ExpenseState {
-  final String message;
+abstract class ExpenseError extends ExpenseState {
+  final String expenseErrorMessage;
 
-  AddExpenseError({required this.message});
+  ExpenseError({required this.expenseErrorMessage});
+
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [expenseErrorMessage];
+}
+
+class AllExpensesError extends ExpenseError {
+  final String allExpenseErrorMessage;
+
+  AllExpensesError({required this.allExpenseErrorMessage})
+    : super(expenseErrorMessage: allExpenseErrorMessage);
+
+  @override
+  List<Object?> get props => [allExpenseErrorMessage];
+}
+
+class AddExpenseError extends ExpenseError {
+  final String addExpenseErrorMessage;
+
+  AddExpenseError({required this.addExpenseErrorMessage})
+    : super(expenseErrorMessage: addExpenseErrorMessage);
+  @override
+  List<Object?> get props => [addExpenseErrorMessage];
 }
 
 class AddExpenseSuccess extends ExpenseState {}

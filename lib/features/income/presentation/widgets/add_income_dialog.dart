@@ -139,7 +139,7 @@ class _AddIncomeDialogState extends State<AddIncomeDialog> {
                 if (state is AddIncomeSuccess) {
                   showCustomSnackBar(context, "Added Income!");
                   Navigator.of(context).pop();
-                } else if (state is AddIncomeError) {
+                } else if (state is FetchIncomesError) {
                   showCustomSnackBar(context, state.message);
                 }
               },

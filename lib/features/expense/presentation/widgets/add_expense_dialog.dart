@@ -140,7 +140,7 @@ class _AddExpenseDialogState extends State<AddExpenseDialog> {
                   showCustomSnackBar(context, "Added Expense!");
                   Navigator.of(context).pop();
                 } else if (state is AddExpenseError) {
-                  showCustomSnackBar(context, state.message);
+                  showCustomSnackBar(context, state.addExpenseErrorMessage);
                 }
               },
               builder: (context, state) {

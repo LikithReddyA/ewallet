@@ -29,4 +29,21 @@ class FirebaseIncomeDatasource implements IncomeDatasource {
       rethrow;
     }
   }
+
+  @override
+  Future<List<IncomeModel>> fetchAllIncome(String userId) async {
+    try {
+      final querySnapshot = await firebaseFirestore
+          .collection("profiles")
+          .doc(userId)
+          .collection("incomeTransactions")
+          .get();
+
+      return querySnapshot.docs
+          .map((doc) => IncomeModel.fromJson(doc.data()))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

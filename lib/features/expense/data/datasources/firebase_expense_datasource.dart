@@ -29,4 +29,21 @@ class FirebaseExpenseDatasource implements ExpenseDatasource {
       rethrow;
     }
   }
+
+  @override
+  Future<List<ExpenseModel>> fetchAllExpenses(String userId) async {
+    try {
+      final querySnapshot = await firebaseFirestore
+          .collection("profiles")
+          .doc(userId)
+          .collection("expenseTransactions")
+          .get();
+
+      return querySnapshot.docs
+          .map((doc) => ExpenseModel.fromJson(doc.data()))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -5,7 +5,9 @@ import 'package:ewallet/features/expense/data/datasources/firebase_expense_datas
 import 'package:ewallet/features/expense/data/repositories/expense_repository_impl.dart';
 import 'package:ewallet/features/expense/domain/repositories/expense_repository.dart';
 import 'package:ewallet/features/expense/domain/usecase/add_expense_usecase.dart';
+import 'package:ewallet/features/expense/domain/usecase/fetch_all_expenses_usecase.dart';
 import 'package:ewallet/features/expense/presentation/bloc/expense_bloc.dart';
+import 'package:ewallet/features/shared/category/domain/repositories/category_repository.dart';
 import 'package:ewallet/features/shared/source/domain/repositories/source_repository.dart';
 import 'package:get_it/get_it.dart';
 
@@ -16,9 +18,10 @@ void expenseDI(GetIt sl) {
 
   sl.registerLazySingleton<ExpenseRepository>(
     () => ExpenseRepositoryImpl(
-      sl<FirebaseHelper>(),
-      sl<SourceRepository>(),
+      firebaseHelper: sl<FirebaseHelper>(),
+      sourceRepository: sl<SourceRepository>(),
       expenseDatasource: sl<ExpenseDatasource>(),
+      categoryRepository: sl<CategoryRepository>(),
     ),
   );
 
@@ -26,7 +29,14 @@ void expenseDI(GetIt sl) {
     () => AddExpenseUsecase(expenseRepository: sl<ExpenseRepository>()),
   );
 
+  sl.registerLazySingleton(
+    () => FetchAllExpensesUsecase(expenseRepository: sl<ExpenseRepository>()),
+  );
+
   sl.registerFactory<ExpenseBloc>(
-    () => ExpenseBloc(addExpenseUsecase: sl<AddExpenseUsecase>()),
+    () => ExpenseBloc(
+      addExpenseUsecase: sl<AddExpenseUsecase>(),
+      fetchAllExpensesUsecase: sl<FetchAllExpensesUsecase>(),
+    ),
   );
 }

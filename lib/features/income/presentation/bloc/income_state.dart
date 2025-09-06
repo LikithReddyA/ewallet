@@ -5,21 +5,42 @@ abstract class IncomeState extends Equatable {
   List<Object?> get props => [];
 }
 
-class IncomeInitial extends IncomeState {}
+abstract class IncomeSuccess extends IncomeState {}
 
-class IncomeLoading extends IncomeState {}
-
-class AddIncomeError extends IncomeState {
+abstract class IncomeError extends IncomeState {
   final String message;
 
-  AddIncomeError({required this.message});
+  IncomeError({required this.message});
+
   @override
   List<Object?> get props => [message];
 }
 
-class AddIncomeSuccess extends IncomeState {}
+class IncomeInitial extends IncomeState {}
 
-class AllIncomeSuccess extends IncomeState {
+class IncomeLoading extends IncomeState {}
+
+class AddIncomeError extends IncomeError {
+  final String addIncomeErrorMessage;
+
+  AddIncomeError({required this.addIncomeErrorMessage})
+    : super(message: addIncomeErrorMessage);
+  @override
+  List<Object?> get props => [addIncomeErrorMessage];
+}
+
+class FetchIncomesError extends IncomeError {
+  final String fetchIncomesError;
+
+  FetchIncomesError({required this.fetchIncomesError})
+    : super(message: fetchIncomesError);
+  @override
+  List<Object?> get props => [fetchIncomesError];
+}
+
+class AddIncomeSuccess extends IncomeSuccess {}
+
+class AllIncomeSuccess extends IncomeSuccess {
   final List<Income> allIncomeTransactions;
 
   AllIncomeSuccess({required this.allIncomeTransactions});
