@@ -1,1 +1,34 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"ewallet-520db","appId":"1:755362521413:android:9481859fead5c60dfc9e2c","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"ewallet-520db","configurations":{"android":"1:755362521413:android:9481859fead5c60dfc9e2c","ios":"1:755362521413:ios:0f64d757122fde10fc9e2c","macos":"1:755362521413:ios:0f64d757122fde10fc9e2c","web":"1:755362521413:web:747e8cad5da51470fc9e2c","windows":"1:755362521413:web:769736047e650f7afc9e2c"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "ewallet-520db",
+          "appId": "1:755362521413:android:9481859fead5c60dfc9e2c",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "ewallet-520db",
+          "configurations": {
+            "android": "1:755362521413:android:9481859fead5c60dfc9e2c",
+            "ios": "1:755362521413:ios:0f64d757122fde10fc9e2c",
+            "macos": "1:755362521413:ios:0f64d757122fde10fc9e2c",
+            "web": "1:755362521413:web:747e8cad5da51470fc9e2c",
+            "windows": "1:755362521413:web:769736047e650f7afc9e2c"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "database": "(default)",
+    "location": "asia-south1",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "database": {
+    "rules": "database.rules.json"
+  }
+}

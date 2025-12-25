@@ -40,7 +40,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
   @override
   Widget build(BuildContext context) {
     // Get the InputDecorationTheme from the current theme
-    final InputDecorationTheme themeDecoration = Theme.of(
+    final InputDecorationThemeData themeDecoration = Theme.of(
       context,
     ).inputDecorationTheme;
 
