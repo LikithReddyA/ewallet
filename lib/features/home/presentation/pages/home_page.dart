@@ -60,6 +60,8 @@ class HomePage extends StatelessWidget {
             ],
           ),
           SourceWidget(
+            // TODO: Update this hardcode value to a variable and make it dynamic
+            visibility: true,
             sources: [
               Source(
                 sourceId: "1",

@@ -12,7 +12,10 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: child,
+      body: SafeArea(
+        top: true,
+        child: Padding(padding: const EdgeInsets.all(8.0), child: child),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex(context),
         onTap: (index) {
@@ -81,7 +84,7 @@ class NavBar extends StatelessWidget {
           );
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

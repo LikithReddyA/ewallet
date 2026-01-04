@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 class SourceWidget extends StatelessWidget {
   final List<Source> sources;
   final String currency;
+  final bool visibility;
 
-  const SourceWidget({Key? key, required this.sources, this.currency = "₹"})
-    : super(key: key);
+  const SourceWidget({
+    Key? key,
+    required this.sources,
+    required this.visibility,
+    this.currency = "₹",
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,6 @@ class SourceWidget extends StatelessWidget {
         itemCount: sources.length,
         itemBuilder: (context, index) {
           final source = sources[index];
-
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Container(
@@ -56,6 +60,7 @@ class SourceWidget extends StatelessWidget {
                 sourceName: source.name,
                 balance: source.money.inRupees,
                 currency: currency,
+                showCurrency: visibility,
               ),
             ),
           );
@@ -69,11 +74,13 @@ class _CardContent extends StatelessWidget {
   final String sourceName;
   final double balance;
   final String currency;
+  final bool showCurrency;
 
   const _CardContent({
     required this.sourceName,
     required this.balance,
     required this.currency,
+    required this.showCurrency,
   });
 
   @override
@@ -96,7 +103,7 @@ class _CardContent extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          "$currency ${balance.toStringAsFixed(2)}",
+          showCurrency ? "$currency ${balance.toStringAsFixed(2)}" : "XXXXX.XX",
           style: const TextStyle(
             color: Colors.white,
             fontSize: 28,
