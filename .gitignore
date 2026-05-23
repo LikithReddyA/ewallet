@@ -1,94 +1,147 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
-
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Symbolication related
-app.*.symbols
-
-# Obfuscation related
-app.*.map.json
-
-
-# Flutter/Dart/Pub related
+# =========================================================
+# Flutter / Dart
+# =========================================================
 .dart_tool/
 .packages
+.pub/
 .pub-cache/
 build/
+
+# Flutter generated
 .flutter-plugins
 .flutter-plugins-dependencies
 .melos_tool/
 
-# Dependency-specific
-pubspec.lock
-.env
-*.iml
-
-# Android
-android/.gradle/
-android/app/build/
-android/local.properties
-android/ndk/
-
-# iOS
-ios/Flutter/Flutter.framework
-ios/Flutter/Flutter.podspec
-ios/.symlinks/
-ios/Pods/
-ios/Runner.xcworkspace/
-ios/build/
-*.xcuserstate
-*.xcworkspace
-
-# macOS
-macos/Flutter/GeneratedPluginRegistrant.swift
-macos/build/
-
-# Web
-web/.dart_tool/
-web/build/
-
-# Windows
-windows/build/
-
-# Linux
-linux/build/
-
-# VS Code
+# =========================================================
+# IDE / Editor
+# =========================================================
+.idea/
 .vscode/
 
-# IntelliJ / Android Studio
-.idea/
+*.iml
+*.ipr
+*.iws
 
-# Other
+# =========================================================
+# OS / System files
+# =========================================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# =========================================================
+# Logs / Temp
+# =========================================================
 *.log
-*.lock
 *.tmp
-*.bak
+*.temp
 *.swp
-*.DS_Store
+*.swo
+*.bak
 
+# =========================================================
+# Environment / Secrets
+# =========================================================
+.env
+.env.*
+!.env.example
+
+# API keys / secrets
+secrets.json
+secret.json
+config/secrets.*
+
+# =========================================================
+# Android
+# =========================================================
+
+# Gradle
+android/.gradle/
+android/build/
+android/app/build/
+
+# Local SDK path
+android/local.properties
+
+# Keystore / signing
+*.jks
+*.keystore
+android/key.properties
+
+# NDK
+android/ndk/
+
+# =========================================================
+# iOS
+# =========================================================
+
+# CocoaPods
+ios/Pods/
+ios/.symlinks/
+
+# Build outputs
+ios/build/
+
+# Flutter iOS generated
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+
+# Xcode
+*.xcworkspace
+*.xcuserstate
+*.xcscmblueprint
+DerivedData/
+
+# =========================================================
+# macOS
+# =========================================================
+macos/build/
+
+# =========================================================
+# Linux
+# =========================================================
+linux/build/
+
+# =========================================================
+# Windows
+# =========================================================
+windows/build/
+
+# =========================================================
+# Web
+# =========================================================
+web/build/
+
+# =========================================================
 # Firebase
-android/app/google-services.json
-ios/Runner/GoogleService-Info.plist
-lib/firebase_options.dart
+# =========================================================
+
+# Firebase Admin SDK keys (NEVER commit)
+firebase-adminsdk*.json
+serviceAccountKey.json
+google-service-account*.json
+
+# Emulator exports
+firebase-export-*/
+
+# Crashlytics / symbols
+app.*.symbols
+app.*.map.json
+
+# =========================================================
+# Optional Generated Files
+# Uncomment ONLY if you intentionally regenerate these
+# =========================================================
+
+# lib/firebase_options.dart
+# android/app/google-services.json
+# ios/Runner/GoogleService-Info.plist
+
+# =========================================================
+# Misc
+# =========================================================
+.history/
+.svn/
+.atom/
+.swiftpm/
+migrate_working_dir/
