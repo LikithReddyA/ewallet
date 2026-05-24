@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "755362521413",
+    "project_id": "ewallet-520db",
+    "storage_bucket": "ewallet-520db.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755362521413:android:9481859fead5c60dfc9e2c",
+        "android_client_info": {
+          "package_name": "com.example.ewallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755362521413-3ocgtm7e0mhlaphr1sfa0pj931559js3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXdEtpSBPt73WtPGaMbpjc0_CSdYOmBLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755362521413-3ocgtm7e0mhlaphr1sfa0pj931559js3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "755362521413-1at5ej0v2v9mkc226a8aehodvrnsp29s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ewallet"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
