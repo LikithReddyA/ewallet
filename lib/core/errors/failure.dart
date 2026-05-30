@@ -1,6 +1,5 @@
 abstract class Failure {
   final String message;
-
   Failure(this.message);
 }
 
@@ -10,4 +9,8 @@ class ServerFailure extends Failure {
 
 class AuthFailure extends Failure {
   AuthFailure(super.message);
+}
+
+class UnkownFailure extends Failure {
+  UnkownFailure(super.message);
 }
