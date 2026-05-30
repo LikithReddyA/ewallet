@@ -5,7 +5,9 @@ import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
 import 'package:ewallet/features/auth/domain/usecases/get_current_user_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/login_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/logout_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/refresh_user_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/register_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/send_verification_email_usecase.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -32,6 +34,12 @@ Future<void> initAuthDependencies(GetIt sl) async {
 
   sl.registerLazySingleton(() => GetCurrentUserUsecase(authRepository: sl()));
 
+  sl.registerLazySingleton(() => RefreshUserUsecase(authRepository: sl()));
+
+  sl.registerLazySingleton(
+    () => SendVerificationEmailUsecase(authRepository: sl()),
+  );
+
   /// Bloc
 
   sl.registerLazySingleton(
@@ -40,6 +48,8 @@ Future<void> initAuthDependencies(GetIt sl) async {
       registerUsecase: sl(),
       logoutUsecase: sl(),
       getCurrentUserUsecase: sl(),
+      refreshUserUsecase: sl(),
+      sendVerificationEmailUsecase: sl(),
     ),
   );
 }

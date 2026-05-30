@@ -11,4 +11,6 @@ abstract class AuthRemoteDataSource {
   });
   Future<void> logout();
   Future<AuthUserModel> getCurrentUser();
+  Future<AuthUserModel> refreshUser();
+  Future<void> sendVerificationEmail();
 }

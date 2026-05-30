@@ -78,4 +78,40 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       throw ServerException("Something went wrong, please try again");
     }
   }
+
+  @override
+  Future<AuthUserModel> refreshUser() async {
+    try {
+      await firebaseAuth.currentUser?.reload();
+      final user = firebaseAuth.currentUser;
+      if (user == null) {
+        throw AuthException("User not found!");
+      }
+      return user.toModel();
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(mapFirebaseAuthError(e));
+    } catch (e) {
+      throw ServerException("Something went wrong, please try again");
+    }
+  }
+
+  @override
+  Future<void> sendVerificationEmail() async {
+    try {
+      await firebaseAuth.currentUser?.reload();
+      final user = firebaseAuth.currentUser;
+      if (user == null) {
+        throw AuthException("User not found!");
+      }
+      if (user.emailVerified) {
+        throw AuthException("User is already verified!");
+      } else {
+        user.sendEmailVerification();
+      }
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(mapFirebaseAuthError(e));
+    } catch (e) {
+      throw ServerException("Something went wrong, please try again");
+    }
+  }
 }

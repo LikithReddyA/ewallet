@@ -9,4 +9,6 @@ abstract class AuthRepository {
   Future<Either<Failure, AuthUser>> register(RegisterParams registerParams);
   Future<Either<Failure, Unit>> logout();
   Future<Either<Failure, AuthUser>> getCurrentUser();
+  Future<Either<Failure, AuthUser>> refreshUser();
+  Future<Either<Failure, Unit>> sendVerificationEmail();
 }

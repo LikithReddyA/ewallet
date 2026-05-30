@@ -1,6 +1,7 @@
 import 'package:ewallet/config/routes/go_router_refresh_stream.dart';
 import 'package:ewallet/config/routes/router_names.dart';
 import 'package:ewallet/config/routes/router_paths.dart';
+import 'package:ewallet/features/auth/presentation/pages/email_verification_page.dart';
 import 'package:ewallet/features/auth/presentation/pages/login_page.dart';
 import 'package:ewallet/features/auth/presentation/pages/register_page.dart';
 import 'package:ewallet/features/dashboard/presentation/pages/dashboard_page.dart';
@@ -19,26 +20,38 @@ class AppRouter {
       refreshListenable: GoRouterRefreshStream(authBloc.stream),
 
       redirect: (context, state) {
-        final isAuthenticated =
-            authBloc.state.authStatus == AuthStatus.authenticated;
+        final authStatus = authBloc.state.authStatus;
 
         final isAuthRoute =
             state.matchedLocation == RoutePaths.login ||
             state.matchedLocation == RoutePaths.register;
 
-        // Not logged in
-        if (!isAuthenticated && !isAuthRoute) {
-          return RoutePaths.login;
-        }
+        final isVerificationRoute =
+            state.matchedLocation == RoutePaths.emailVerification;
 
-        // Already logged in
-        if (isAuthenticated && isAuthRoute) {
-          return RoutePaths.dashboard;
-        }
+        switch (authStatus) {
+          case AuthStatus.authenticated:
+            if (isAuthRoute || isVerificationRoute) {
+              return RoutePaths.dashboard;
+            }
+            return null;
 
-        return null;
+          case AuthStatus.unverified:
+            if (!isVerificationRoute) {
+              return RoutePaths.emailVerification;
+            }
+            return null;
+
+          case AuthStatus.unauthenticated:
+            if (!isAuthRoute) {
+              return RoutePaths.login;
+            }
+            return null;
+
+          default:
+            return null;
+        }
       },
-
       routes: [
         GoRoute(
           path: RoutePaths.login,
@@ -56,6 +69,12 @@ class AppRouter {
           path: RoutePaths.dashboard,
           name: RouteNames.dashboard,
           builder: (_, _) => const DashboardPage(),
+        ),
+
+        GoRoute(
+          path: RoutePaths.emailVerification,
+          name: RouteNames.emailVerification,
+          builder: (context, state) => EmailVerificationPage(),
         ),
       ],
     );

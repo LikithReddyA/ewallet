@@ -58,4 +58,24 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(FailureHandler.handle(e));
     }
   }
+
+  @override
+  Future<Either<Failure, AuthUser>> refreshUser() async {
+    try {
+      final user = await authRemoteDataSource.refreshUser();
+      return Right(user.toEntity());
+    } catch (e) {
+      return Left(FailureHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> sendVerificationEmail() async {
+    try {
+      await authRemoteDataSource.sendVerificationEmail();
+      return Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handle(e));
+    }
+  }
 }
