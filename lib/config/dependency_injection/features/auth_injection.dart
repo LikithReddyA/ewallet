@@ -2,6 +2,7 @@ import 'package:ewallet/features/auth/data/datasources/auth_remote_data_source.d
 import 'package:ewallet/features/auth/data/datasources/auth_remote_data_source_impl.dart';
 import 'package:ewallet/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
+import 'package:ewallet/features/auth/domain/usecases/get_current_user_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/login_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/register_usecase.dart';
@@ -29,6 +30,8 @@ Future<void> initAuthDependencies(GetIt sl) async {
 
   sl.registerLazySingleton(() => LogoutUsecase(authRepository: sl()));
 
+  sl.registerLazySingleton(() => GetCurrentUserUsecase(authRepository: sl()));
+
   /// Bloc
 
   sl.registerLazySingleton(
@@ -36,6 +39,7 @@ Future<void> initAuthDependencies(GetIt sl) async {
       loginUsecase: sl(),
       registerUsecase: sl(),
       logoutUsecase: sl(),
+      getCurrentUserUsecase: sl(),
     ),
   );
 }

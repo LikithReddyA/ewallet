@@ -10,4 +10,5 @@ abstract class AuthRemoteDataSource {
     required String password,
   });
   Future<void> logout();
+  Future<AuthUserModel> getCurrentUser();
 }

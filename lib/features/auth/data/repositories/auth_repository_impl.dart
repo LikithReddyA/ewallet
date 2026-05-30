@@ -48,4 +48,14 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(FailureHandler.handle(e));
     }
   }
+
+  @override
+  Future<Either<Failure, AuthUser>> getCurrentUser() async {
+    try {
+      final user = await authRemoteDataSource.getCurrentUser();
+      return Right(user.toEntity());
+    } catch (e) {
+      return Left(FailureHandler.handle(e));
+    }
+  }
 }
