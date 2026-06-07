@@ -22,6 +22,10 @@ class FailureHandler {
       return AuthFailure(mapFirebaseAuthError(error));
     }
 
+    if (error is CacheException) {
+      return CacheFailure(error.message);
+    }
+
     /// Fallback
     return UnkownFailure('Something went wrong. Please try again.');
   }

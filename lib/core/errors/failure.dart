@@ -11,6 +11,10 @@ class AuthFailure extends Failure {
   AuthFailure(super.message);
 }
 
+class CacheFailure extends Failure {
+  CacheFailure(super.message);
+}
+
 class UnkownFailure extends Failure {
   UnkownFailure(super.message);
 }

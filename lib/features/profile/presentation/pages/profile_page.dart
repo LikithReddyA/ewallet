@@ -3,7 +3,7 @@ import 'package:ewallet/core/theme/app_radius.dart';
 import 'package:ewallet/core/theme/app_spacing.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_event.dart';
-import 'package:ewallet/features/auth/presentation/bloc/auth_state.dart';
+import 'package:ewallet/features/settings/presentation/widgets/theme_settings_widget.dart';
 import 'package:ewallet/shared/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,6 +37,10 @@ class ProfilePage extends StatelessWidget {
                     Text(context.read<AuthBloc>().state.authUser!.email),
                   ],
                 ),
+                SizedBox(height: AppSpacing.lg),
+                Divider(height: AppSpacing.xs),
+                SizedBox(height: AppSpacing.lg),
+                ThemeSettingsWidget(),
                 SizedBox(height: AppSpacing.lg),
                 Divider(height: AppSpacing.xs),
                 SizedBox(height: AppSpacing.lg),
