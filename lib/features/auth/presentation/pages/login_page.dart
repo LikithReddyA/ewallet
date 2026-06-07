@@ -73,8 +73,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-      listenWhen: (previous, current) =>
-          previous.errorMessage != current.errorMessage,
       listener: (context, state) {
         if (state.errorMessage != null) {
           SnackbarHelper.showError(context, state.errorMessage!);
