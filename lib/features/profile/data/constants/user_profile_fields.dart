@@ -1,5 +1,5 @@
 class UserProfileFields {
-  static const String id = 'id';
+  static const String id = 'userId';
   static const String email = 'email';
   static const String displayName = 'displayName';
   static const String photoUrl = 'photoUrl';

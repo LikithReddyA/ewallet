@@ -5,7 +5,7 @@ import 'package:ewallet/features/profile/domain/enums/onboarding_status.dart';
 class UserProfileMapper {
   static UserProfile toEntity(UserProfileModel model) {
     return UserProfile(
-      id: model.id,
+      userId: model.userId,
       email: model.email,
       displayName: model.displayName,
       photoUrl: model.photoUrl,
@@ -20,7 +20,7 @@ class UserProfileMapper {
 
   static UserProfileModel toModel(UserProfile entity) {
     return UserProfileModel(
-      id: entity.id,
+      userId: entity.userId,
       email: entity.email,
       displayName: entity.displayName,
       photoUrl: entity.photoUrl,

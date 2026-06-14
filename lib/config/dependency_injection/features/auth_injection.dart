@@ -2,9 +2,13 @@ import 'package:ewallet/features/auth/data/datasources/auth_remote_data_source.d
 import 'package:ewallet/features/auth/data/datasources/auth_remote_data_source_impl.dart';
 import 'package:ewallet/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:ewallet/features/auth/domain/repositories/auth_repository.dart';
+import 'package:ewallet/features/auth/domain/usecases/create_account_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/get_current_session_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/get_current_user_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/login_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/login_user_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/logout_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/refresh_user_session_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/refresh_user_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/register_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/send_verification_email_usecase.dart';
@@ -40,16 +44,39 @@ Future<void> initAuthDependencies(GetIt sl) async {
     () => SendVerificationEmailUsecase(authRepository: sl()),
   );
 
+  sl.registerLazySingleton(
+    () =>
+        CreateAccountUsecase(authRepository: sl(), userProfileRepository: sl()),
+  );
+
+  sl.registerLazySingleton(
+    () => LoginUserUsecase(authRepository: sl(), userProfileRepository: sl()),
+  );
+
+  sl.registerLazySingleton(
+    () => RefreshUserSessionUsecase(
+      authRepository: sl(),
+      userProfileRepository: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton(
+    () => GetCurrentSessionUsecase(
+      authRepository: sl(),
+      userProfileRepository: sl(),
+    ),
+  );
+
   /// Bloc
 
   sl.registerLazySingleton(
     () => AuthBloc(
-      loginUsecase: sl(),
-      registerUsecase: sl(),
       logoutUsecase: sl(),
-      getCurrentUserUsecase: sl(),
-      refreshUserUsecase: sl(),
       sendVerificationEmailUsecase: sl(),
+      createAccountUsecase: sl(),
+      loginUserUsecase: sl(),
+      getCurrentSessionUsecase: sl(),
+      refreshUserSessionUsecase: sl(),
     ),
   );
 }

@@ -114,4 +114,23 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       throw ServerException("Something went wrong, please try again");
     }
   }
+
+  @override
+  Future<void> deleteCurrentUser() async {
+    try {
+      final user = firebaseAuth.currentUser;
+
+      if (user == null) {
+        throw AuthException("User not found");
+      }
+
+      await user.delete();
+    } on AuthException {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(mapFirebaseAuthError(e));
+    } catch (_) {
+      throw ServerException("Something went wrong, please try again");
+    }
+  }
 }

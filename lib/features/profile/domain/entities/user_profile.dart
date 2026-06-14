@@ -1,7 +1,7 @@
 import 'package:ewallet/features/profile/domain/enums/onboarding_status.dart';
 
 class UserProfile {
-  final String id;
+  final String userId;
   final String email;
   final String displayName;
   final String? photoUrl;
@@ -11,7 +11,7 @@ class UserProfile {
   final DateTime updatedAt;
 
   UserProfile({
-    required this.id,
+    required this.userId,
     required this.email,
     required this.displayName,
     this.photoUrl,
@@ -29,7 +29,7 @@ class UserProfile {
     DateTime? updatedAt,
   }) {
     return UserProfile(
-      id: id,
+      userId: userId,
       email: email,
       displayName: displayName ?? this.displayName,
       photoUrl: photoUrl ?? this.photoUrl,

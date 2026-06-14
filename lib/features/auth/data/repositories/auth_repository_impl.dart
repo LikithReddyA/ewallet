@@ -78,4 +78,14 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(FailureHandler.handle(e));
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> deleteCurrentUser() async {
+    try {
+      await authRemoteDataSource.deleteCurrentUser();
+      return Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handle(e));
+    }
+  }
 }

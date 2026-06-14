@@ -13,4 +13,5 @@ abstract class AuthRemoteDataSource {
   Future<AuthUserModel> getCurrentUser();
   Future<AuthUserModel> refreshUser();
   Future<void> sendVerificationEmail();
+  Future<void> deleteCurrentUser();
 }

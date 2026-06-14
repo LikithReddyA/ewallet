@@ -20,6 +20,9 @@ String mapFirebaseAuthError(FirebaseAuthException e) {
     case 'network-request-failed':
       return 'No internet connection';
 
+    case 'requires-recent-login':
+      return 'Requires recent login to delete the user, so log in back again';
+
     default:
       return e.message ?? 'Authentication failed';
   }

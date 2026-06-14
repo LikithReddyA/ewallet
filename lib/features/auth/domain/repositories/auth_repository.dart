@@ -11,4 +11,5 @@ abstract class AuthRepository {
   Future<Either<Failure, AuthUser>> getCurrentUser();
   Future<Either<Failure, AuthUser>> refreshUser();
   Future<Either<Failure, Unit>> sendVerificationEmail();
+  Future<Either<Failure, Unit>> deleteCurrentUser();
 }

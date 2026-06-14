@@ -2,32 +2,32 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:ewallet/core/common/base/base_usecase.dart';
+import 'package:ewallet/features/auth/domain/params/create_account_params.dart';
 import 'package:ewallet/features/auth/domain/params/login_params.dart';
-import 'package:ewallet/features/auth/domain/params/register_params.dart';
-import 'package:ewallet/features/auth/domain/usecases/get_current_user_usecase.dart';
-import 'package:ewallet/features/auth/domain/usecases/login_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/create_account_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/get_current_session_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/login_user_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/logout_usecase.dart';
-import 'package:ewallet/features/auth/domain/usecases/refresh_user_usecase.dart';
-import 'package:ewallet/features/auth/domain/usecases/register_usecase.dart';
+import 'package:ewallet/features/auth/domain/usecases/refresh_user_session_usecase.dart';
 import 'package:ewallet/features/auth/domain/usecases/send_verification_email_usecase.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_event.dart';
 import 'package:ewallet/features/auth/presentation/bloc/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final LoginUsecase loginUsecase;
-  final RegisterUsecase registerUsecase;
   final LogoutUsecase logoutUsecase;
-  final GetCurrentUserUsecase getCurrentUserUsecase;
-  final RefreshUserUsecase refreshUserUsecase;
   final SendVerificationEmailUsecase sendVerificationEmailUsecase;
+  final CreateAccountUsecase createAccountUsecase;
+  final LoginUserUsecase loginUserUsecase;
+  final GetCurrentSessionUsecase getCurrentSessionUsecase;
+  final RefreshUserSessionUsecase refreshUserSessionUsecase;
 
   AuthBloc({
-    required this.loginUsecase,
-    required this.registerUsecase,
     required this.logoutUsecase,
-    required this.getCurrentUserUsecase,
-    required this.refreshUserUsecase,
     required this.sendVerificationEmailUsecase,
+    required this.createAccountUsecase,
+    required this.loginUserUsecase,
+    required this.getCurrentSessionUsecase,
+    required this.refreshUserSessionUsecase,
   }) : super(const AuthState()) {
     on<AppStarted>(_onAppStarted);
     on<LoginRequested>(_onLogin);
@@ -38,8 +38,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onLogin(LoginRequested event, Emitter<AuthState> emit) async {
-    emit(state.copyWith(authStatus: AuthStatus.loading));
-    final result = await loginUsecase(
+    emit(state.copyWith(authStatus: AuthStatus.loading, errorMessage: null));
+    final result = await loginUserUsecase(
       LoginParams(email: event.email, password: event.password),
     );
     result.fold(
@@ -51,19 +51,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
         );
       },
-      (user) {
-        if (user.isEmailVerified) {
-          emit(
-            state.copyWith(
-              authStatus: AuthStatus.authenticated,
-              authUser: user,
-            ),
-          );
-        } else {
-          emit(
-            state.copyWith(authStatus: AuthStatus.unverified, authUser: user),
-          );
-        }
+      (session) {
+        final authStatus = session.authUser.isEmailVerified
+            ? AuthStatus.authenticated
+            : AuthStatus.unverified;
+
+        emit(
+          state.copyWith(
+            authStatus: authStatus,
+            appSession: session,
+            errorMessage: null,
+          ),
+        );
       },
     );
   }
@@ -90,10 +89,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     RegisterRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(authStatus: AuthStatus.loading));
-    final result = await registerUsecase(
-      RegisterParams(email: event.email, password: event.password),
+    emit(state.copyWith(authStatus: AuthStatus.loading, errorMessage: null));
+
+    final result = await createAccountUsecase(
+      CreateAccountParams(
+        email: event.email,
+        password: event.password,
+        displayName: event.displayName,
+        photoUrl: event.photoUrl,
+      ),
     );
+
     result.fold(
       (failure) {
         emit(
@@ -103,19 +109,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
         );
       },
-      (user) {
-        if (user.isEmailVerified) {
-          emit(
-            state.copyWith(
-              authStatus: AuthStatus.authenticated,
-              authUser: user,
-            ),
-          );
-        } else {
-          emit(
-            state.copyWith(authStatus: AuthStatus.unverified, authUser: user),
-          );
-        }
+      (session) {
+        final authStatus = session.authUser.isEmailVerified
+            ? AuthStatus.authenticated
+            : AuthStatus.unverified;
+
+        emit(
+          state.copyWith(
+            authStatus: authStatus,
+            appSession: session,
+            errorMessage: null,
+          ),
+        );
       },
     );
   }
@@ -124,25 +129,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AppStarted event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(authStatus: AuthStatus.loading));
-    final result = await getCurrentUserUsecase(NoParams());
+    emit(state.copyWith(authStatus: AuthStatus.loading, errorMessage: null));
+    final result = await getCurrentSessionUsecase(NoParams());
     result.fold(
       (failure) {
         emit(state.copyWith(authStatus: AuthStatus.unauthenticated));
       },
-      (user) {
-        if (user.isEmailVerified) {
-          emit(
-            state.copyWith(
-              authStatus: AuthStatus.authenticated,
-              authUser: user,
-            ),
-          );
-        } else {
-          emit(
-            state.copyWith(authStatus: AuthStatus.unverified, authUser: user),
-          );
-        }
+      (session) {
+        final authStatus = session.authUser.isEmailVerified
+            ? AuthStatus.authenticated
+            : AuthStatus.unverified;
+
+        emit(
+          state.copyWith(
+            authStatus: authStatus,
+            appSession: session,
+            errorMessage: null,
+          ),
+        );
       },
     );
   }
@@ -151,9 +155,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     RefreshUserRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(authStatus: AuthStatus.loading));
-    final result = await refreshUserUsecase(NoParams());
-
+    emit(state.copyWith(authStatus: AuthStatus.loading, errorMessage: null));
+    final result = await refreshUserSessionUsecase(NoParams());
     result.fold(
       (failure) {
         emit(
@@ -163,19 +166,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
         );
       },
-      (user) {
-        if (user.isEmailVerified) {
-          emit(
-            state.copyWith(
-              authStatus: AuthStatus.authenticated,
-              authUser: user,
-            ),
-          );
-        } else {
-          emit(
-            state.copyWith(authStatus: AuthStatus.unverified, authUser: user),
-          );
-        }
+      (session) {
+        final authStatus = session.authUser.isEmailVerified
+            ? AuthStatus.authenticated
+            : AuthStatus.unverified;
+
+        emit(
+          state.copyWith(
+            authStatus: authStatus,
+            appSession: session,
+            errorMessage: null,
+          ),
+        );
       },
     );
   }
